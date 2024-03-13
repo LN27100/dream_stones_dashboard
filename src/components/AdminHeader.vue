@@ -1,9 +1,9 @@
 <template>
-    <div class="ad_head">
-        Header admin
-        <!-- Header Admin {{ getMarcel }} -->
-        <!-- <button @click="logout()">Logout</button> -->
-    </div>
+  <div class="ad_head">
+    Bienvenue administrateur
+    <!-- Header Admin {{ getMarcel }} -->
+    <!-- <button @click="logout()">Logout</button> -->
+  </div>
 </template>
 
 <script>
@@ -11,24 +11,27 @@
 // import { mapGetters } from 'vuex'
 
 export default {
-    name: 'AdminHeader',
-    // methods:{
-    //     logout(){
-    //         accountService.logout()
-    //         this.$router.push('/')
-    //     }
-    // },
-    // computed:{
-    //     ...mapGetters(['getMarcel'])
-    // }
-}
+  name: "AdminHeader",
+  // methods:{
+  //     logout(){
+  //         accountService.logout()
+  //         this.$router.push('/')
+  //     }
+  // },
+  // computed:{
+  //     ...mapGetters(['getMarcel'])
+  // }
+};
 </script>
 <style>
 .ad_head {
-    border-bottom: solid 1px black;
+  border-bottom: solid 1px black;
+  background-color: #0b533d;
+  height: 3rem;
+  color: white;
 }
 
-button{
-        float: right;
-    }
+button {
+  float: right;
+}
 </style>

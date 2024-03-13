@@ -5,14 +5,29 @@
       <li>&nbsp;</li>
       <li><router-link to="/admin/dashboard">Dashboard</router-link></li>
       <li>&nbsp;</li>
-      <li><router-link to="/admin/users/index">Liste des utilisateurs</router-link></li>
-      <li><router-link to="/admin/users/add">Ajouter un utilisateur</router-link></li>
-      <li>&nbsp;</li>
+
+      <p>Utilisateur :</p>
       <li>
-        <router-link to="/admin/DreamStones/index">Liste des pierres</router-link>
+        <router-link to="/admin/users/index"
+          >Liste des utilisateurs</router-link
+        >
       </li>
       <li>
-        <router-link to="/admin/DreamStones/edit/:id">Ajouter une pierre</router-link>
+        <router-link to="/admin/users/add">Ajouter un utilisateur</router-link>
+      </li>
+      <li>&nbsp;</li>
+
+      <p>Pierres :</p>
+
+      <li>
+        <router-link to="/admin/DreamStones/index"
+          >Liste des pierres</router-link
+        >
+      </li>
+      <li>
+        <router-link to="/admin/DreamStones/edit/:id"
+          >Ajouter une pierre</router-link
+        >
       </li>
     </ul>
   </div>
@@ -27,10 +42,27 @@ export default {
 <style>
 ul {
   list-style: none;
-  padding-left: 0px;
+  padding: 1rem;
   margin-right: 10px;
 }
 ul li {
   text-align: left;
+}
+
+a:-webkit-any-link {
+  text-decoration: none;
+  color: white;
+}
+
+a.router-link-exact-active {
+  color: #42b983;
+}
+
+p {
+  color: white;
+  text-align: left;
+  text-decoration-line: underline;
+  text-decoration-color: white;
+  text-underline-offset: 0.3rem;
 }
 </style>

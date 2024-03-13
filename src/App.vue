@@ -3,8 +3,7 @@
       <img alt="Vue logo" src="./assets/logo.png">
 <nav>
 
-  <router-link to='/'>Accueil</router-link> |
-  <router-link to='/admin/dashboard'>Dashboard Dream Stones</router-link>
+ <h1>Dream Stones</h1>
 
 </nav>
 <!-- ici j'affiche le template du Layout qui servira à tous les enfants aussi -->
@@ -12,25 +11,20 @@
 </template>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Macondo&display=swap');
+/*   font-family: "Macondo", cursive; */
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+/*   font-family: "Varela Round", sans-serif; */
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
+  font-family: "Varela Round", sans-serif;
+    -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
 }
 
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
+h1 {
+  font-family: "Macondo", cursive;
 }
 
 img {

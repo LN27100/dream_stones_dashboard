@@ -38,6 +38,8 @@ export default {
 #ad_side {
     width: 20%;
     border-right: solid 1px black;
+    background-color: #0b533d;
+
 }
 
 #ad_display {
