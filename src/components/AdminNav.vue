@@ -15,6 +15,11 @@
       <li>
         <router-link to="/admin/users/add">Ajouter un utilisateur</router-link>
       </li>
+      <li>
+        <router-link to="/admin/users/edit/10"
+          >Editer un utilisateur</router-link
+        >
+      </li>
       <li>&nbsp;</li>
 
       <p>Pierres :</p>

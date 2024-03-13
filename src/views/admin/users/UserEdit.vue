@@ -1,12 +1,16 @@
 <template>
     <div>
-User edit works
+Editer un utilisateur
+<!-- variable pour afficher les propriétés récupérées dans l'url -->
+<div> {{ id }}</div>
     </div>
 </template>
 
 <script>
 export default {
-    name:'UserEdit'
+    name:'UserEdit',
+    // déclarer les propriétés que l'on va recevoir
+    props: ['id']
 }
 </script>
 

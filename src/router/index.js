@@ -32,7 +32,8 @@ const routes = [
       {path: 'dashboard', name: 'dashboard', component: Dashboard },
       {path: 'users/index', component: UserIndex},
       {path: 'users/add', component: UserAdd},
-      {path: 'users/edit/:id', component: UserEdit},
+      //utilisation de props pour récupérés les propriétés du paramètres id dans l'url
+      {path: 'users/edit/:id', component: UserEdit, props: true},
 
       {path: 'Dreamstones/index', component: DreamStonesIndex},
       {path: 'Dreamstones/edit/:id', component: DreamStonesEdit}
