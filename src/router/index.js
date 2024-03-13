@@ -31,13 +31,8 @@ const routes = [
       { path: "users/index", component: UserIndex },
       { path: "users/add", component: UserAdd },
       { path: "users/edit/:id(\\d+)", component: UserEdit, props: true },
-
       { path: "Dreamstones/index", component: DreamStonesIndex },
-      {
-        path: "Dreamstones/edit/:id(\\d+)",
-        component: DreamStonesEdit,
-        props: true,
-      },
+      { path: "Dreamstones/edit/:id(\\d+)", component: DreamStonesEdit, props: true },
     ],
   },
   {
