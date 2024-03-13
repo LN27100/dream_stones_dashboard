@@ -14,7 +14,8 @@ import Login from "@/views/auth/Login.vue";
 
 import NotFound from "@/views/admin/NotFound.vue";
 
-// import authGuard from '@/_helpers/auth-guard'
+import { authGuard } from '@/_helpers/auth-guard'
+localStorage.setItem('token', 'marcel')
 
 const routes = [
   {
@@ -38,8 +39,8 @@ const routes = [
   {
     path: "/login",
     name: "Login",
-    component: Login,
-  },
+    component: Login
+  },  
   {
     path: "/:patchMatch(.*)*",
     component: NotFound,
@@ -51,13 +52,13 @@ const router = createRouter({
   routes,
 });
 
-// Vérouillage de la partie admin (token)
-// router.beforeEach((to, from, next) => {
-//   if(to.matched[0].name == 'admin'){
-//     authGuard()
-//   }
-//   next()
-// })
+// Vérouillage de la partie admin et pour chaque lien de la page (token)
+router.beforeEach((to, from, next) => {
+  if(to.matched[0].name == 'admin'){
+    authGuard()
+  }
+  next()
+})
 
 export default router;
 

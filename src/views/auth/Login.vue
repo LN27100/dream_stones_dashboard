@@ -27,6 +27,8 @@
       </div>
       <div class="formGroup">
         <button type="submit" class="btn2">Se connecter</button>
+        <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
+
       </div>
     </form>
   </div>
@@ -45,11 +47,27 @@ export default {
   },
   methods: {
     login() {
-      console.log("stop form");
-      console.log(this.user);
-    },
-  },
-};
+      const data = {
+        email: this.email,
+        password: this.password
+      };
+      axios.post('http://localhost:3000/login', data)
+        .then(response => {
+          if (response.data.success) {
+            this.$router.push({ name: 'DashboardPage' });
+          } else {
+            // Affichage du message d'erreur en cas d'échec de connexion
+            this.errorMessage = response.data.message;
+          }
+        })
+        .catch(error => {
+          console.error('Erreur lors de la connexion:', error);
+          // Affichage d'un message générique en cas d'erreur
+          this.errorMessage = 'Une erreur s\'est produite lors de la connexion. Veuillez réessayer.';
+        });
+    }
+  }
+}
 </script>
 
 <style>
@@ -65,6 +83,9 @@ export default {
   margin-top: 1rem;
 }
 
+*, ::after, ::before {
+  box-sizing:content-box;
+}
 .btn2 {
   margin-top: 1rem;
   background-color: #24916a;

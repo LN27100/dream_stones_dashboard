@@ -1,7 +1,6 @@
 <template>
   <div class="ad_head">
     Bienvenue administrateur
-    <!-- Header Admin {{ getMarcel }} -->
     <!-- <button @click="logout()">Logout</button> -->
   </div>
 </template>
@@ -19,7 +18,6 @@ export default {
   //     }
   // },
   // computed:{
-  //     ...mapGetters(['getMarcel'])
   // }
 };
 </script>

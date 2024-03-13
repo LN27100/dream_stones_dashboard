@@ -25,7 +25,7 @@ export default {
     rgba(34, 193, 195, 1) 14%,
     rgba(91, 189, 158, 1) 60%
   );
-  width: 10rem;
+  width: 20rem;
   margin: 0 auto;
   margin-top: 1rem;
 }
@@ -33,6 +33,9 @@ export default {
 .homeTexte {
     color: black;
     font-family: "Varela Round", sans-serif;
+    text-decoration: none;
+    font-size:1.5rem;
+    width:20rem;
 }
 
 </style>
