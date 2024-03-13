@@ -1,19 +1,38 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+
+import Home from '@/views/admin/Home.vue'
+
+import AdminLayout from '@/views/admin/Layout.vue'
+import Dashboard from '@/views/admin/Dashboard.vue'
+
+import UserIndex from '@/views/admin/users/UserIndex.vue'
+import UserAdd from '@/views/admin/users/UserAdd.vue'
+import UserEdit from '@/views/admin/users/UserEdit.vue'
+
+import DreamStonesIndex from '@/views/admin/DreamStones/DreamStonesIndex.vue'
+import DreamStonesEdit from '@/views/admin/DreamStones/DreamStonesEdit.vue'
 
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: Home
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path: '/admin',
+    name: 'admin',
+    component: AdminLayout,
+    children: [
+      {path: 'dashboard', name: 'dashboard', component: Dashboard },
+      {path: 'users/index', component: UserIndex},
+      {path: 'users/add', component: UserAdd},
+      {path: 'users/edit/:id', component: UserEdit},
+
+      {path: 'Dreamstones/index', component: DreamStonesIndex},
+      {path: 'Dreamstones/edit/:id', component: DreamStonesEdit}
+
+
+    ]
   }
 ]
 
