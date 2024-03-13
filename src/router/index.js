@@ -33,6 +33,9 @@ const routes = [
 
 
     ]
+  },
+  {
+    path: '/:patchMatch(.*)*', redirect: '/'
   }
 ]
 
