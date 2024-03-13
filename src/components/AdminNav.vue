@@ -9,15 +9,15 @@
       <p>Utilisateur :</p>
       <li>
         <router-link to="/admin/users/index"
-          >Liste des utilisateurs</router-link
+          >Liste des admins</router-link
         >
       </li>
       <li>
-        <router-link to="/admin/users/add">Ajouter un utilisateur</router-link>
+        <router-link to="/admin/users/add">Ajouter un admin</router-link>
       </li>
       <li>
         <router-link to="/admin/users/edit/10"
-          >Editer un utilisateur</router-link
+          >Editer un admin</router-link
         >
       </li>
       <li>&nbsp;</li>
