@@ -12,6 +12,9 @@ import UserEdit from '@/views/admin/users/UserEdit.vue'
 import DreamStonesIndex from '@/views/admin/DreamStones/DreamStonesIndex.vue'
 import DreamStonesEdit from '@/views/admin/DreamStones/DreamStonesEdit.vue'
 
+// import Login from '@/views/auth/Login.vue'
+
+
 import NotFound from '@/views/admin/NotFound.vue'
 
 const routes = [
@@ -37,6 +40,9 @@ const routes = [
 
     ]
   },
+  // {
+  //   path: '/login', name: 'Login', component: Login
+  // },
   {
     path: '/:patchMatch(.*)*', component: NotFound
   }
