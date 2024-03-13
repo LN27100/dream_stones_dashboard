@@ -15,7 +15,6 @@ import Login from "@/views/auth/Login.vue";
 import NotFound from "@/views/admin/NotFound.vue";
 
 import { authGuard } from '@/_helpers/auth-guard'
-localStorage.setItem('token', 'marcel')
 
 const routes = [
   {

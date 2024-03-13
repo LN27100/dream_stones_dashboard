@@ -141,6 +141,30 @@ app.get('/admins/:id', async (req, res) => {
 });
 
 //PRODUITS
+// Définition du modèle Product
+class Product extends Model {}
+
+Product.init({
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
+  PRODUCT_REF: {
+    type: DataTypes.STRING(100),
+    allowNull: false
+  },
+  PRODUCT_DESC: {
+    type: DataTypes.STRING(255),
+    allowNull: false
+  },
+  // Ajoutez d'autres attributs de votre modèle ici
+}, {
+  sequelize,
+  modelName: 'Product', // Nom du modèle
+  tableName: 'product', // Nom de la table dans la base de données
+  timestamps: false // Désactive les champs createdAt et updatedAt
+});
 
 // create
 app.post('/products', async (req, res) => {
@@ -250,8 +274,6 @@ app.get('/dashboard/totalStones', async (req, res) => {
     res.status(500).json({ error: 'Erreur lors du comptage des pierres' });
   }
 });
-
-
 
 // Démarrer le serveur
 app.listen(port, () => {
