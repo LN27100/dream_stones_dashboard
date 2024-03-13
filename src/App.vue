@@ -1,13 +1,15 @@
 <!-- composant de démarrage (vue de démarrage) -->
 <template>
-      <img alt="Vue logo" src="./assets/logo.png">
-<nav>
+  <img alt="Vue logo" src="./assets/logo.png">
+<nav class="homeNav">
 
- <h1>Dream Stones</h1>
+<router-link to='/'>Accueil</router-link> |
+<router-link to='/admin/dashboard'>Dashboard Dream Stones</router-link> |
+<router-link to="/login">Connexion</router-link>
 
 </nav>
 <!-- ici j'affiche le template du Layout qui servira à tous les enfants aussi -->
-  <router-view/>
+<router-view/>
 </template>
 
 <style>
@@ -31,5 +33,10 @@ img {
   position: absolute;
   left: 1.8rem;
   height: 3rem;
+}
+
+.homeNav {
+  background-color: #0b533d;
+  height: 5rem;
 }
 </style>

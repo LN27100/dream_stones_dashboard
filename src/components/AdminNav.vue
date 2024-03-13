@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul>
-      <li><router-link to="/">Accueil</router-link></li>
+      <li><router-link to='/'>Accueil</router-link></li>
       <li>&nbsp;</li>
       <li><router-link to="/admin/dashboard">Dashboard</router-link></li>
       <li>&nbsp;</li>
