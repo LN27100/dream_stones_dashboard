@@ -12,7 +12,7 @@ import UserEdit from '@/views/admin/users/UserEdit.vue'
 import DreamStonesIndex from '@/views/admin/DreamStones/DreamStonesIndex.vue'
 import DreamStonesEdit from '@/views/admin/DreamStones/DreamStonesEdit.vue'
 
-// import Login from '@/views/auth/Login.vue'
+import Login from '@/views/auth/Login.vue'
 
 
 import NotFound from '@/views/admin/NotFound.vue'
@@ -33,17 +33,18 @@ const routes = [
       {path: 'users/index', component: UserIndex},
       {path: 'users/add', component: UserAdd},
       //utilisation de props pour récupérés les propriétés du paramètres id dans l'url
-      {path: 'users/edit/:id', component: UserEdit, props: true},
+      // \\d+ indique que l'id ne doit comporter que des chiffres
+      {path: 'users/edit/:id(\\d+)', component: UserEdit, props: true},
 
       {path: 'Dreamstones/index', component: DreamStonesIndex},
-      {path: 'Dreamstones/edit/:id', component: DreamStonesEdit}
+      {path: 'Dreamstones/edit/:id(\\d+)', component: DreamStonesEdit, props: true}
 
 
     ]
   },
-  // {
-  //   path: '/login', name: 'Login', component: Login
-  // },
+  {
+    path: '/login', name: 'Login', component: Login
+  },
   {
     path: '/:patchMatch(.*)*', component: NotFound
   }

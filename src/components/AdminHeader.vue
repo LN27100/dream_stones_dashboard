@@ -31,7 +31,4 @@ export default {
   color: white;
 }
 
-button {
-  float: right;
-}
 </style>
