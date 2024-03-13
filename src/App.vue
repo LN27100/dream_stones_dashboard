@@ -1,7 +1,13 @@
 <!-- composant de démarrage (vue de démarrage) -->
 <template>
       <img alt="Vue logo" src="./assets/logo.png">
+<nav>
 
+  <router-link to='/'>Accueil</router-link> |
+  <router-link to='/admin/dashboard'>Dashboard Dream Stones</router-link>
+
+</nav>
+<!-- ici j'affiche le template du Layout qui servira à tous les enfants aussi -->
   <router-view/>
 </template>
 
@@ -25,5 +31,11 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
+}
+
+img {
+  position: absolute;
+  left: 1.8rem;
+  height: 3rem;
 }
 </style>

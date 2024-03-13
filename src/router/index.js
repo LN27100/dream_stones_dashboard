@@ -12,6 +12,8 @@ import UserEdit from '@/views/admin/users/UserEdit.vue'
 import DreamStonesIndex from '@/views/admin/DreamStones/DreamStonesIndex.vue'
 import DreamStonesEdit from '@/views/admin/DreamStones/DreamStonesEdit.vue'
 
+import NotFound from '@/views/admin/NotFound.vue'
+
 const routes = [
   {
     path: '/',
@@ -23,6 +25,7 @@ const routes = [
     name: 'admin',
     component: AdminLayout,
     children: [
+      {path: '/', name: 'home', component: Home },
       {path: 'dashboard', name: 'dashboard', component: Dashboard },
       {path: 'users/index', component: UserIndex},
       {path: 'users/add', component: UserAdd},
@@ -35,7 +38,7 @@ const routes = [
     ]
   },
   {
-    path: '/:patchMatch(.*)*', redirect: '/'
+    path: '/:patchMatch(.*)*', component: NotFound
   }
 ]
 
