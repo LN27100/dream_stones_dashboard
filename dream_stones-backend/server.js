@@ -60,6 +60,18 @@ sequelize.authenticate()
     console.error('Erreur de connexion à la base de données :', err);
   });
 
+  app.post('/logout', async (req, res) => {
+    try {
+      // Vous pouvez ajouter du code ici pour gérer la déconnexion,
+      // tel que la suppression des données de session, la réinitialisation du jeton d'authentification, etc.
+      
+      res.status(200).json({ message: 'Déconnexion réussie' });
+    } catch (error) {
+      console.error('Erreur lors de la déconnexion :', error);
+      res.status(500).json({ error: 'Erreur lors de la déconnexion' });
+    }
+  });
+
 app.post('/admins', async (req, res) => {
   const { last_name, first_name, email, password } = req.body;
 
