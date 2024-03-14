@@ -284,6 +284,125 @@ app.get('/dashboard/totalStones', async (req, res) => {
   }
 });
 
+// TABLE ORDERS
+
+// Définir la classe Order et son initialisation
+class Order extends Model {}
+
+Order.init({
+  ORDERS_ID: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
+  ORDERS_SHIPPING: DataTypes.STRING(50),
+  ORDERS_PAYEMENT_MODE: DataTypes.STRING(50),
+  ORDERS_DELETE_ARTICLE: DataTypes.STRING(50),
+  ORDERS_NEW_PRICE: DataTypes.DECIMAL(9, 2),
+  ORDER_STATUS: DataTypes.STRING(50),
+  ORDERS_SHIPPING_FEES: DataTypes.DECIMAL(9, 2),
+  ORDER_CANCELLATION: DataTypes.STRING(50),
+  ORDERS_TOTAL_PRICE: DataTypes.DECIMAL(9, 2),
+  ORDERS_TOTAL_QUANTITY: DataTypes.INTEGER,
+  ORDERS_REF: {
+    type: DataTypes.STRING(50),
+    unique: true
+  },
+  ORDERS_DATE: DataTypes.DATE,
+  ORDERS_QUANTITY: DataTypes.INTEGER,
+  USERPROFILE_ID: DataTypes.INTEGER,
+}, {
+  sequelize,
+  modelName: 'Order',
+  tableName: 'orders',
+  timestamps: false
+});
+
+// Pour compter le nombre total de commandes
+app.get('/orders/count', async (req, res) => {
+  try {
+    const count = await Order.count();
+    res.status(200).json({ total_orders: count });
+  } catch (error) {
+    console.error('Erreur lors du comptage des commandes :', error);
+    res.status(500).json({ error: 'Erreur lors du comptage des commandes' });
+  }
+});
+
+// Pour récupérer les détails de toutes les commandes validées
+app.get('/orders/validated', async (req, res) => {
+  try {
+    const validatedOrders = await Order.findAll({ where: { ORDER_STATUS: 'validée' } });
+    res.status(200).json({ validated_orders: validatedOrders });
+  } catch (error) {
+    console.error('Erreur lors de la récupération des commandes validées :', error);
+    res.status(500).json({ error: 'Erreur lors de la récupération des commandes validées' });
+  }
+});
+
+// Pour récupérer les détails de toutes les commandes en attente de validation
+app.get('/orders/pending', async (req, res) => {
+  try {
+    const pendingOrders = await Order.findAll({ where: { ORDER_STATUS: 'en attente de validation' } });
+    res.status(200).json({ pending_orders: pendingOrders });
+  } catch (error) {
+    console.error('Erreur lors de la récupération des commandes en attente de validation :', error);
+    res.status(500).json({ error: 'Erreur lors de la récupération des commandes en attente de validation' });
+  }
+});
+
+// Pour récupérer le nombre de commandes validées et le nombre de commandes en attente
+app.get('/dashboard/orderStatusCount', async (req, res) => {
+  try {
+    // Exécutez la requête SQL pour obtenir le nombre de commandes avec chaque statut
+    const [result] = await sequelize.query(`
+      SELECT 
+        SUM(CASE WHEN ORDER_STATUS = 'validée' THEN 1 ELSE 0 END) AS nombre_validées,
+        SUM(CASE WHEN ORDER_STATUS = 'en attente de validation' THEN 1 ELSE 0 END) AS nombre_en_attente
+      FROM 
+        orders;
+    `);
+
+    // Renvoyez les résultats au format JSON
+    res.status(200).json({ 
+      nombre_validées: result[0].nombre_validées,
+      nombre_en_attente: result[0].nombre_en_attente
+    });
+  } catch (error) {
+    console.error('Erreur lors de la récupération du nombre de commandes par statut :', error);
+    res.status(500).json({ error: 'Erreur lors de la récupération du nombre de commandes par statut' });
+  }
+});
+
+// USERPROFIL
+
+class UserProfile extends Model {}
+
+UserProfile.init({
+  USERPROFILE_ID: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
+}, {
+  sequelize,
+  modelName: 'UserProfile',
+  tableName: 'userprofil',
+  timestamps: false
+});
+
+// Route pour compter le nombre d'utilisateurs
+app.get('/userprofiles/count', async (req, res) => {
+  try {
+    const count = await UserProfile.count();
+    res.status(200).json({ total_userprofiles: count });
+  } catch (error) {
+    console.error('Erreur lors du comptage des utilisateurs :', error);
+    res.status(500).json({ error: 'Erreur lors du comptage des utilisateurs' });
+  }
+});
+
+
 
 app.listen(port, () => {
   console.log(`Serveur écoute sur le port ${port}`);

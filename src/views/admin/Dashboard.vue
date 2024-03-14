@@ -2,7 +2,7 @@
   <div>
     <!-- Dashboard -->
     <main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4">
-      <h1 class="mt-3">Dashboard</h1>
+      <h1 class="mt-3 dashboard-title">Dashboard</h1>
       <div class="row mt-3">
         <div class="col-md-3">
           <div class="card">
@@ -15,36 +15,42 @@
         <div class="col-md-3">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Active Users</h5>
-              <p class="card-text">500</p>
+              <h5 class="card-title">Total des utilisateurs</h5>
+              <p class="card-text">{{ totalUsers }}</p>
             </div>
           </div>
         </div>
         <div class="col-md-3">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Total Orders</h5>
-              <p class="card-text">2000</p>
+              <h5 class="card-title">Total des commandes</h5>
+              <p class="card-text"></p>
             </div>
           </div>
         </div>
         <div class="col-md-3">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Total Orders</h5>
-              <p class="card-text">2000</p>
+              <h5 class="card-title">Nombre de commandes validées</h5>
+              <p class="card-text"></p>
             </div>
           </div>
         </div>
-      </div>
-
-      <div class="row mt-3">
-        <div class="col-md-6">
-          <!-- Chart Placeholder -->
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Nombre de commandes en attentes</h5>
+              <p class="card-text"></p>
+            </div>
+          </div>
         </div>
-
-        <div class="col-md-6">
-          <!-- Pie Chart Placeholder -->
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Stats catégories de pierres</h5>
+              <p class="card-text"></p>
+            </div>
+          </div>
         </div>
       </div>
     </main>
@@ -56,11 +62,13 @@ export default {
   name: "DashboardPage",
   data() {
     return {
-      totalProducts: 0
+      totalProducts: 0,
+      totalUsers: 0 
     };
   },
   mounted() {
     this.fetchTotalProducts();
+    this.fetchTotalUsers();
   },
   methods: {
     async fetchTotalProducts() {
@@ -70,6 +78,15 @@ export default {
         this.totalProducts = data.total_stones;
       } catch (error) {
         console.error('Erreur lors de la récupération du nombre total de produits :', error);
+      }
+    },
+    async fetchTotalUsers() {
+      try {
+        const response = await fetch('http://localhost:3000/userprofiles/count');
+        const data = await response.json();
+        this.totalUsers = data.total_userprofiles;
+      } catch (error) {
+        console.error('Erreur lors de la récupération du nombre total d\'utilisateurs :', error);
       }
     }
   }
