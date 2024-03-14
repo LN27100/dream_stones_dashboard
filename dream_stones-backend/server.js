@@ -63,10 +63,7 @@ sequelize.authenticate()
   });
 
   app.post('/logout', async (req, res) => {
-    try {
-      // Vous pouvez ajouter du code ici pour gérer la déconnexion,
-      // tel que la suppression des données de session, la réinitialisation du jeton d'authentification, etc.
-      
+    try {      
       res.status(200).json({ message: 'Déconnexion réussie' });
     } catch (error) {
       console.error('Erreur lors de la déconnexion :', error);
@@ -82,7 +79,7 @@ app.post('/admins', async (req, res) => {
     // Hasher le mot de passe
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Créer un nouvel administrateur
+    // CREER un nouvel ADMINISTRATEUR
     await Admin.create({
       last_name,
       first_name,
@@ -97,7 +94,25 @@ app.post('/admins', async (req, res) => {
   }
 });
 
-// Route pour récupérer la liste des administrateurs
+// ROUTE pour RECUPERER le PRENOM de l'administrateur par son identifiant
+app.get('/admins/:id/firstName', async (req, res) => {
+  const adminId = req.params.id;
+
+  try {
+    const admin = await Admin.findByPk(adminId);
+
+    if (!admin) {
+      return res.status(404).json({ success: false, message: 'Administrateur non trouvé.' });
+    }
+
+    return res.status(200).json({ success: true, firstName: admin.first_name });
+  } catch (error) {
+    console.error('Erreur lors de la récupération du prénom de l\'administrateur :', error);
+    return res.status(500).json({ success: false, message: 'Une erreur s\'est produite lors de la récupération du prénom de l\'administrateur.' });
+  }
+});
+
+// ROUTE pour RECUPERER la liste des ADMINISTRATEURS
 app.get('/admins', async (req, res) => {
   try {
     const admins = await Admin.findAll({ 
@@ -111,7 +126,7 @@ app.get('/admins', async (req, res) => {
   }
 });
 
-
+// LOGIN
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
@@ -135,6 +150,7 @@ app.post('/login', async (req, res) => {
   }
 });
 
+// TROUVER UN ADMIN
 app.get('/admins/:id', async (req, res) => {
   const adminId = req.params.id;
 
@@ -152,6 +168,8 @@ app.get('/admins/:id', async (req, res) => {
   }
 });
 
+
+// PRODUITS
 class Product extends Model {}
 
 Product.init({
@@ -207,6 +225,7 @@ Product.init({
   timestamps: false
 });
 
+// ROUTE pour CREER un PRODUIT
 app.post('/products', async (req, res) => {
   const { PRODUCT_REF, PRODUCT_DESC, PRODUCT_STOCK, PRODUCT_UNIT_PRICE, PRODUCT_ORIGIN_COUNTRY, PRODUCT_PICTURE, SPL_ID, TYPE_ID, PRODUCT_NAME, PRODUCT_COLOR } = req.body;
 
@@ -231,7 +250,8 @@ app.post('/products', async (req, res) => {
   }
 });
 
-// Route pour récupérer la liste des pierres
+
+// ROUTE pour RECUPERER la liste des PIERRES
 app.get('/products', async (req, res) => {
   try {
     const products = await Product.findAll({ attributes: ['PRODUCT_ID', 'PRODUCT_REF', 'PRODUCT_DESC', 'PRODUCT_STOCK', 'PRODUCT_UNIT_PRICE', 'PRODUCT_ORIGIN_COUNTRY', 'PRODUCT_PICTURE', 'SPL_ID', 'TYPE_ID', 'PRODUCT_NAME', 'PRODUCT_COLOR'] });
@@ -243,6 +263,7 @@ app.get('/products', async (req, res) => {
   }
 });
 
+// ROUTE pour METTRE A JOUR (UPDATE) une PIERRE
 app.put('/products/:id', async (req, res) => {
   const productId = req.params.id;
   const { PRODUCT_REF, PRODUCT_DESC, PRODUCT_STOCK, PRODUCT_UNIT_PRICE, PRODUCT_ORIGIN_COUNTRY, PRODUCT_PICTURE, SPL_ID, TYPE_ID, PRODUCT_NAME, PRODUCT_COLOR } = req.body;
@@ -274,6 +295,7 @@ app.put('/products/:id', async (req, res) => {
   }
 });
 
+// ROUTE pour SUPPRIMER une PIERRE
 app.delete('/products/:id', async (req, res) => {
   const productId = req.params.id;
 
@@ -293,6 +315,8 @@ app.delete('/products/:id', async (req, res) => {
   }
 });
 
+
+// ROUTE pour obtenir le TOTAL des PIERRES
 app.get('/dashboard/totalStones', async (req, res) => {
   try {
     const count = await Product.count();
@@ -303,9 +327,10 @@ app.get('/dashboard/totalStones', async (req, res) => {
   }
 });
 
+
 // TABLE ORDERS
 
-// Définir la classe Order et son initialisation
+// Définir la classe Order
 class Order extends Model {}
 
 Order.init({
@@ -337,7 +362,7 @@ Order.init({
   timestamps: false
 });
 
-// Pour compter le nombre total de commandes
+// ROUTE pour COMPTER le nombre TOTAL de COMMANDES (ORDERS)
 app.get('/orders/count', async (req, res) => {
   try {
     const count = await Order.count();
@@ -348,7 +373,7 @@ app.get('/orders/count', async (req, res) => {
   }
 });
 
-// Pour récupérer les détails de toutes les commandes validées
+// ROUTE pour RECUPERER les détails de toutes les COMMANDES VALIDEES
 app.get('/orders/validated', async (req, res) => {
   try {
     const validatedOrders = await Order.findAll({ where: { ORDER_STATUS: 'validée' } });
@@ -359,7 +384,7 @@ app.get('/orders/validated', async (req, res) => {
   }
 });
 
-// Pour récupérer les détails de toutes les commandes en attente de validation
+// ROUTE Pour RECUPERER les détails de toutes les COMMANDES EN ATTENTE DE VALIDATION
 app.get('/orders/pending', async (req, res) => {
   try {
     const pendingOrders = await Order.findAll({ where: { ORDER_STATUS: 'en attente de validation' } });
@@ -370,7 +395,7 @@ app.get('/orders/pending', async (req, res) => {
   }
 });
 
-// Pour récupérer le nombre de commandes validées et le nombre de commandes en attente
+// ROUTE pour RECUPERER le NOMBRE de commandes VALIDEES et le NOMBRE de commandes EN ATTENTE (ORDERS)
 app.get('/dashboard/orderStatusCount', async (req, res) => {
   try {
     // Exécutez la requête SQL pour obtenir le nombre de commandes avec chaque statut
@@ -395,6 +420,7 @@ app.get('/dashboard/orderStatusCount', async (req, res) => {
 
 // USERPROFIL
 
+// Définir la classe Userprofile
 class UserProfile extends Model {}
 
 UserProfile.init({
@@ -410,7 +436,7 @@ UserProfile.init({
   timestamps: false
 });
 
-// Route pour compter le nombre d'utilisateurs
+// ROUTE pour COMPTER le nombre d'UTILISATEURS
 app.get('/userprofiles/count', async (req, res) => {
   try {
     const count = await UserProfile.count();

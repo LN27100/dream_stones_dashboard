@@ -3,14 +3,24 @@
   <img alt="Vue logo" src="./assets/logo.png">
 <nav class="homeNav">
 
-<router-link to='/'>Accueil</router-link> |
-<router-link to='/admin/dashboard'>Portail admin</router-link> |
-<router-link to="/login">Connexion</router-link>
+  <PublicNav />
 
 </nav>
 <!-- ici j'affiche le template du Layout qui servira à tous les enfants aussi -->
 <router-view/>
 </template>
+
+
+<script>
+import PublicNav from "@/components/PublicNav.vue";
+
+export default {
+  name: "App",
+  components: {
+    PublicNav,
+  },
+};
+</script>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Macondo&display=swap');
@@ -32,7 +42,7 @@ h1 {
 img {
   position: absolute;
   left: 1.8rem;
-  height: 3rem;
+  height: 5rem;
 }
 
 .homeNav {

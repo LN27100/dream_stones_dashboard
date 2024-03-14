@@ -60,7 +60,8 @@ a:-webkit-any-link {
 }
 
 a.router-link-exact-active {
-  color: #42b983;
+  color:bisque;
+  font-weight: bold;
 }
 
 p {

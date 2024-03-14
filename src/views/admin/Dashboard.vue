@@ -8,7 +8,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Total des pierres</h5>
-              <p class="card-text">{{ totalProducts }}</p>
+              <p class="recupText">{{ totalProducts }}</p>
             </div>
           </div>
         </div>
@@ -16,7 +16,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Total des utilisateurs</h5>
-              <p class="card-text">{{ totalUsers }}</p>
+              <p class="recupText">{{ totalUsers }}</p>
             </div>
           </div>
         </div>
@@ -24,7 +24,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Total des commandes</h5>
-              <p class="card-text">{{ totalOrders }}</p>
+              <p class="recupText">{{ totalOrders }}</p>
             </div>
           </div>
         </div>
@@ -32,7 +32,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Nombre de commandes validées</h5>
-              <p class="card-text">{{ totalValidatedOrders }}</p>
+              <p class="recupText">{{ totalValidatedOrders }}</p>
             </div>
           </div>
         </div>
@@ -40,7 +40,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Nombre de commandes en attentes</h5>
-              <p class="card-text">{{ totalPendingOrders }}</p>
+              <p class="recupText">{{ totalPendingOrders }}</p>
             </div>
           </div>
         </div>
@@ -48,7 +48,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Stats catégories de pierres</h5>
-              <p class="card-text"></p>
+              <p class="recupText"></p>
             </div>
           </div>
         </div>
@@ -127,7 +127,7 @@ export default {
 /* Dashboard */
 
 .dashboard-title {
-  font-size: 2rem;
+  font-size: 2,5rem;
   color: #239670;
 }
 
@@ -149,5 +149,11 @@ export default {
   color: white;
   padding: 1rem;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.recupText {
+  color: white;
+  text-decoration: none;
 }
 </style>
