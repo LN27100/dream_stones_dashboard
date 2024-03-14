@@ -14,9 +14,9 @@
           v-model="user.email"
         />
       </div>
+      <!-- v-model indique que lorsque j'écris dans les inputs, cela écrit aussi dans les propriétés user -->
       <div class="formGroup">
         <label for="user_password">Mot de passe </label>
-        <!-- v-model indique que lorsque j'écris dans les inputs, cela écrit aussi dans les propriétés user -->
         <input
           id="user_password"
           type="password"
@@ -27,15 +27,15 @@
       </div>
       <div class="formGroup">
         <button type="submit" class="btn2">Se connecter</button>
+        <!-- Utilisez v-if pour afficher errorMessage uniquement s'il est défini -->
         <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
-
       </div>
     </form>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   name: "Login",
@@ -45,31 +45,36 @@ export default {
         email: "",
         password: "",
       },
+      errorMessage: "",
     };
   },
   methods: {
     login() {
       const data = {
-        email: this.email,
-        password: this.password
+        email: this.user.email,
+        password: this.user.password,
       };
-      axios.post('http://localhost:3000/login', data)
-        .then(response => {
+
+      axios
+        .post("http://localhost:3000/login", data)
+        .then((response) => {
           if (response.data.success) {
-            this.$router.push({ name: 'DashboardPage' });
+            // Rediriger vers le tableau de bord en cas de succès
+            this.$router.push({ name: "dashboard" });
           } else {
-            // Affichage du message d'erreur en cas d'échec de connexion
+            // Afficher un message d'erreur en cas d'échec
             this.errorMessage = response.data.message;
           }
         })
-        .catch(error => {
-          console.error('Erreur lors de la connexion:', error);
-          // Affichage d'un message générique en cas d'erreur
-          this.errorMessage = 'Une erreur s\'est produite lors de la connexion. Veuillez réessayer.';
+        .catch((error) => {
+          // Gérer les erreurs de requête
+          console.error("Erreur lors de la connexion:", error);
+          this.errorMessage =
+            "Une erreur s'est produite lors de la connexion. Veuillez réessayer.";
         });
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style>
@@ -85,8 +90,10 @@ export default {
   margin-top: 1rem;
 }
 
-*, ::after, ::before {
-  box-sizing:content-box;
+*,
+::after,
+::before {
+  box-sizing: content-box;
 }
 .btn2 {
   margin-top: 1rem;

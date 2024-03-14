@@ -4,7 +4,7 @@
 <nav class="homeNav">
 
 <router-link to='/'>Accueil</router-link> |
-<router-link to='/admin/dashboard'>Dashboard Dream Stones</router-link> |
+<router-link to='/admin/dashboard'>Portail admin</router-link> |
 <router-link to="/login">Connexion</router-link>
 
 </nav>

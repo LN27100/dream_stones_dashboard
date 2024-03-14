@@ -14,7 +14,6 @@ import Login from "@/views/auth/Login.vue";
 
 import NotFound from "@/views/admin/NotFound.vue";
 
-import { authGuard } from '@/_helpers/auth-guard'
 
 const routes = [
   {
@@ -34,6 +33,18 @@ const routes = [
       { path: "Dreamstones/index", component: DreamStonesIndex },
       { path: "Dreamstones/edit/:id(\\d+)", component: DreamStonesEdit, props: true },
     ],
+    // Fonction de garde pour empêcher l'accès au portail admin si non connecté.
+    beforeEnter: (to, from, next) => {
+      // Vérifiez si l'utilisateur est connecté
+      const loggedIn = localStorage.getItem("user");
+      if (!loggedIn) {
+        // Utilisateur non connecté, rediriger vers la page de connexion
+        next({ name: "Login" });
+      } else {
+        // Utilisateur connecté, autoriser l'accès à la route
+        next();
+      }
+    },
   },
   {
     path: "/login",
@@ -51,13 +62,6 @@ const router = createRouter({
   routes,
 });
 
-// Vérouillage de la partie admin et pour chaque lien de la page (token)
-router.beforeEach((to, from, next) => {
-  if(to.matched[0].name == 'admin'){
-    authGuard()
-  }
-  next()
-})
 
 export default router;
 

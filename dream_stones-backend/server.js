@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { Sequelize, Model, DataTypes } = require('sequelize');
 const cors = require('cors');
+const bcrypt = require('bcrypt');
 
 // Créer une instance de l'application Express
 const app = express();
@@ -76,12 +77,15 @@ app.post('/admins', async (req, res) => {
   const { last_name, first_name, email, password, company_name } = req.body;
 
   try {
+    // Hasher le mot de passe avant de l'enregistrer dans la base de données
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     // Créer un nouvel administrateur
     const newAdmin = await Admin.create({
       last_name,
       first_name,
       email,
-      password,
+      password: hashedPassword, // Utiliser le mot de passe hashé
       company_name
     });
 
@@ -108,7 +112,9 @@ app.post('/login', async (req, res) => {
     }
 
     // Vérifier si le mot de passe est correct
-    if (admin.password === password) {
+    const passwordMatch = await bcrypt.compare(password, admin.password);
+
+    if (passwordMatch) {
       // Mot de passe correct, connexion réussie
       return res.json({ success: true, message: 'Connexion réussie.' });
     } else {
@@ -279,3 +285,8 @@ app.get('/dashboard/totalStones', async (req, res) => {
 app.listen(port, () => {
   console.log(`Serveur écoute sur le port ${port}`);
 });
+
+
+// MEMO
+
+// bcrypt.js compare le mot de passe fourni avec celui stocké dans la base de données

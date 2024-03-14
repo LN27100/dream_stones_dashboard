@@ -1,7 +1,7 @@
 <template>
     <div class="containerHome">
-       <p class="homeTexte">Bienvenue sur le projet côté administrateur.</p>
-       <p class="homeTexte">Dans celui-ci, vous retrouverez le Dashboard, accessible une fois connecté en temps qu'administrateur</p>
+       <p class="homeTexte">Bienvenue sur la plateforme administrateur.</p>
+       <p class="homeTexte">Veuillez vous connecter pour accéder à votre dashboard</p>
     </div>
 </template>
 
