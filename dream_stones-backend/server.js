@@ -280,10 +280,10 @@ app.get('/dashboard/totalStones', async (req, res) => {
 
     res.status(200).json({ total_stones: count });
   } catch (error) {
-    console.error('Erreur lors du comptage des pierres :', error);
     res.status(500).json({ error: 'Erreur lors du comptage des pierres' });
   }
 });
+
 
 app.listen(port, () => {
   console.log(`Serveur écoute sur le port ${port}`);
