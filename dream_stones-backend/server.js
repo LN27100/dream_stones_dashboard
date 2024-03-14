@@ -60,28 +60,28 @@ sequelize.authenticate()
     console.error('Erreur de connexion à la base de données :', err);
   });
 
-  app.post('/admins', async (req, res) => {
-    const { last_name, first_name, email, password } = req.body;
-  
-    try {
-      // Hasher le mot de passe
-      const hashedPassword = await bcrypt.hash(password, 10);
-  
-      // Créer un nouvel administrateur
-      await Admin.create({
-        last_name,
-        first_name,
-        email,
-        password: hashedPassword,
-      });
-  
-      res.status(201).json({ message: 'Administrateur créé avec succès' });
-    } catch (error) {
-      console.error('Erreur lors de la création de l\'administrateur :', error);
-      res.status(500).json({ error: 'Erreur lors de la création de l\'administrateur' });
-    }
-  });
-  
+app.post('/admins', async (req, res) => {
+  const { last_name, first_name, email, password } = req.body;
+
+  try {
+    // Hasher le mot de passe
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Créer un nouvel administrateur
+    await Admin.create({
+      last_name,
+      first_name,
+      email,
+      password: hashedPassword,
+    });
+
+    res.status(201).json({ message: 'Administrateur créé avec succès' });
+  } catch (error) {
+    console.error('Erreur lors de la création de l\'administrateur :', error);
+    res.status(500).json({ error: 'Erreur lors de la création de l\'administrateur' });
+  }
+});
+
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
@@ -125,18 +125,50 @@ app.get('/admins/:id', async (req, res) => {
 class Product extends Model {}
 
 Product.init({
-  id: {
+  PRODUCT_ID: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
   PRODUCT_REF: {
-    type: DataTypes.STRING(100),
+    type: DataTypes.STRING(50),
     allowNull: false
   },
   PRODUCT_DESC: {
-    type: DataTypes.STRING(255),
+    type: DataTypes.STRING(750),
     allowNull: false
+  },
+  PRODUCT_STOCK: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  PRODUCT_UNIT_PRICE: {
+    type: DataTypes.DECIMAL(9, 2),
+    allowNull: false
+  },
+  PRODUCT_ORIGIN_COUNTRY: {
+    type: DataTypes.STRING(50),
+    allowNull: false
+  },
+  PRODUCT_PICTURE: {
+    type: DataTypes.STRING(50),
+    allowNull: true
+  },
+  SPL_ID: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  TYPE_ID: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  PRODUCT_NAME: {
+    type: DataTypes.STRING(100),
+    allowNull: true
+  },
+  PRODUCT_COLOR: {
+    type: DataTypes.STRING(50),
+    allowNull: true
   },
 }, {
   sequelize,
@@ -146,12 +178,20 @@ Product.init({
 });
 
 app.post('/products', async (req, res) => {
-  const { PRODUCT_REF, PRODUCT_DESC } = req.body;
+  const { PRODUCT_REF, PRODUCT_DESC, PRODUCT_STOCK, PRODUCT_UNIT_PRICE, PRODUCT_ORIGIN_COUNTRY, PRODUCT_PICTURE, SPL_ID, TYPE_ID, PRODUCT_NAME, PRODUCT_COLOR } = req.body;
 
   try {
     const newProduct = await Product.create({
       PRODUCT_REF,
       PRODUCT_DESC,
+      PRODUCT_STOCK,
+      PRODUCT_UNIT_PRICE,
+      PRODUCT_ORIGIN_COUNTRY,
+      PRODUCT_PICTURE,
+      SPL_ID,
+      TYPE_ID,
+      PRODUCT_NAME,
+      PRODUCT_COLOR
     });
 
     res.status(201).json({ message: 'Produit ajouté avec succès' });
@@ -174,7 +214,7 @@ app.get('/products', async (req, res) => {
 
 app.put('/products/:id', async (req, res) => {
   const productId = req.params.id;
-  const { PRODUCT_REF, PRODUCT_DESC } = req.body;
+  const { PRODUCT_REF, PRODUCT_DESC, PRODUCT_STOCK, PRODUCT_UNIT_PRICE, PRODUCT_ORIGIN_COUNTRY, PRODUCT_PICTURE, SPL_ID, TYPE_ID, PRODUCT_NAME, PRODUCT_COLOR } = req.body;
 
   try {
     const product = await Product.findByPk(productId);
@@ -185,6 +225,14 @@ app.put('/products/:id', async (req, res) => {
 
     product.PRODUCT_REF = PRODUCT_REF;
     product.PRODUCT_DESC = PRODUCT_DESC;
+    product.PRODUCT_STOCK = PRODUCT_STOCK;
+    product.PRODUCT_UNIT_PRICE = PRODUCT_UNIT_PRICE;
+    product.PRODUCT_ORIGIN_COUNTRY = PRODUCT_ORIGIN_COUNTRY;
+    product.PRODUCT_PICTURE = PRODUCT_PICTURE;
+    product.SPL_ID = SPL_ID;
+    product.TYPE_ID = TYPE_ID;
+    product.PRODUCT_NAME = PRODUCT_NAME;
+    product.PRODUCT_COLOR = PRODUCT_COLOR;
 
     await product.save();
 

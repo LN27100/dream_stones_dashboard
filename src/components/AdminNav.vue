@@ -30,7 +30,7 @@
         >
       </li>
       <li>
-        <router-link to="/admin/DreamStones/edit/:id"
+        <router-link to="/admin/DreamStones/add"
           >Ajouter une pierre</router-link
         >
       </li>

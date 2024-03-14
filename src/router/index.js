@@ -8,7 +8,7 @@ import UserAdd from "@/views/admin/users/UserAdd.vue";
 import UserEdit from "@/views/admin/users/UserEdit.vue";
 
 import DreamStonesIndex from "@/views/admin/DreamStones/DreamStonesIndex.vue";
-import DreamStonesEdit from "@/views/admin/DreamStones/DreamStonesEdit.vue";
+import DreamStonesAdd from "@/views/admin/DreamStones/DreamStonesAdd.vue";
 
 import Login from "@/views/auth/Login.vue";
 
@@ -29,9 +29,9 @@ const routes = [
       { path: "dashboard", name: "dashboard", component: Dashboard },
       { path: "users/index", component: UserIndex },
       { path: "users/add", component: UserAdd },
-      { path: "users/edit/:id(\\d+)", component: UserEdit, props: true },
+      { path: "/admin/users/edit/:id", component: UserEdit, props: true, },
       { path: "Dreamstones/index", component: DreamStonesIndex },
-      { path: "Dreamstones/edit/:id(\\d+)", component: DreamStonesEdit, props: true },
+      { path: "Dreamstones/add", component: DreamStonesAdd, props: true },
     ],
     // Fonction de garde pour empêcher l'accès au portail admin si non connecté.
     beforeEnter: (to, from, next) => {
@@ -70,3 +70,4 @@ export default router;
 
 //utilisation de props pour récupérés les propriétés du paramètres id dans l'url
 // \\d+ indique que l'id ne doit comporter que des chiffres
+// Props sert à passer les paramètres d'URL en tant que props au composant
