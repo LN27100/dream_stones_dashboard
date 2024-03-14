@@ -11,15 +11,9 @@ import axios from 'axios';
 export default {
   name: "AdminHeader",
   methods: {
-    async logout() {
-      try {
-        // Appel de l'API pour déconnecter l'utilisateur
-        await axios.post('/logout');
-        // Redirection vers la page de connexion
-        this.$router.push('/login');
-      } catch (error) {
-        console.error('Erreur lors de la déconnexion :', error);
-      }
+    logout() {
+      localStorage.removeItem("loggedIn");
+      this.$router.push({ name: "Login" });
     }
   }
 };

@@ -50,6 +50,11 @@ export default {
   },
   methods: {
     login() {
+      if (!this.user.email || !this.user.password) {
+        this.errorMessage = "Veuillez remplir tous les champs.";
+        return;
+      }
+
       const data = {
         email: this.user.email,
         password: this.user.password,
@@ -59,17 +64,15 @@ export default {
         .post("http://localhost:3000/login", data)
         .then((response) => {
           if (response.data.success) {
-            // Enregistrez le statut de l'utilisateur connecté dans le stockage local
             localStorage.setItem("loggedIn", true);
-            // Redirigez vers le tableau de bord en cas de succès
             this.$router.push({ name: "dashboard" });
+            // Réinitialisation de l'erreur en cas de succès de la connexion
+            this.errorMessage = "";
           } else {
-            // Affichez un message d'erreur en cas d'échec
             this.errorMessage = response.data.message;
           }
         })
         .catch((error) => {
-          // Gérez les erreurs de requête
           console.error("Erreur lors de la connexion:", error);
           this.errorMessage =
             "Une erreur s'est produite lors de la connexion. Veuillez réessayer.";
