@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <h2>Ajouter un administrateur</h2>
+  <div class="containerReg">
+    <h1>Ajouter un administrateur</h1>
     <form @submit.prevent="addAdmin">
-      <div>
+      <div class="input-container">
         <label for="last_name">Nom:</label>
         <input
           type="text"
@@ -11,7 +11,7 @@
           required
         />
       </div>
-      <div>
+      <div class="input-container">
         <label for="first_name">Prénom:</label>
         <input
           type="text"
@@ -20,7 +20,7 @@
           required
         />
       </div>
-      <div>
+        <div class="input-container">
         <label for="email">Email:</label>
         <input
           type="email"
@@ -30,7 +30,7 @@
           autocomplete="username"
         />
       </div>
-      <div>
+      <div class="input-container">
         <label for="password">Mot de passe:</label>
         <input
           type="password"
@@ -40,9 +40,11 @@
           autocomplete="new-password"
         />
       </div>
+      <div class="button-container">
       <button type="submit">Ajouter</button>
+      </div>
     </form>
-    <p v-if="message">{{ message }}</p>
+    <p class="message" v-if="message">{{ message }}</p>
   </div>
 </template>
 
@@ -79,4 +81,26 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+
+.containerReg {
+    border-radius: 20px;
+  width: 60rem;
+  margin: 0 auto;
+  background: linear-gradient(0deg, rgba(34, 193, 195, 1) 14%, rgba(91, 189, 158, 1) 60%);
+  /* ombrage card */
+  -webkit-box-shadow: 10px 15px 5px 3px #6eb59d;
+  -moz-box-shadow: 10px 15px 5px 3px #6eb59d;
+  filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=10, OffY=15, Color='#6eb59d', Positive='true');
+  zoom: 1;
+  box-shadow: 10px 15px 5px 3px #6eb59d;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+  }
+
+p.message {
+  color: #0B533D;
+  text-decoration: none;
+}
+</style>

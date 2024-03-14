@@ -1,6 +1,6 @@
 <template>
     <div>
-      <h1>User Edit</h1>
+      <h1>Editer le profil admin</h1>
       <div v-if="user">
         <p>Last Name: {{ user.last_name }}</p>
         <p>First Name: {{ user.first_name }}</p>
@@ -14,6 +14,7 @@
   
   <script>
 export default {
+  name: 'UserEdit',
   data() {
     return {
       user: null

@@ -83,6 +83,10 @@ export default {
 </script>
 
 <style>
+.error-message {
+  color: red
+}
+
 .containerUsage {
   padding: 1rem 15rem 1rem 15rem;
   background: linear-gradient(

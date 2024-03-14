@@ -34,6 +34,11 @@
           >Ajouter une pierre</router-link
         >
       </li>
+      <li>
+        <router-link to="/admin/DreamStones/edit/:id"
+          >Editer une pierre</router-link
+        >
+      </li>
     </ul>
   </div>
 </template>

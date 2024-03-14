@@ -9,6 +9,8 @@ import UserEdit from "@/views/admin/users/UserEdit.vue";
 
 import DreamStonesIndex from "@/views/admin/DreamStones/DreamStonesIndex.vue";
 import DreamStonesAdd from "@/views/admin/DreamStones/DreamStonesAdd.vue";
+import DreamStonesEdit from "@/views/admin/DreamStones/DreamStonesEdit.vue";
+
 
 import Login from "@/views/auth/Login.vue";
 
@@ -31,7 +33,9 @@ const routes = [
       { path: "users/add", component: UserAdd },
       { path: "/admin/users/edit/:id", component: UserEdit, props: true, },
       { path: "Dreamstones/index", component: DreamStonesIndex },
-      { path: "Dreamstones/add", component: DreamStonesAdd, props: true },
+      { path: "Dreamstones/add", component: DreamStonesAdd },
+      { path: "Dreamstones/edit/:id", component: DreamStonesEdit, props: true },
+
     ],
     // Fonction de garde pour empêcher l'accès au portail admin si non connecté.
     beforeEnter: (to, from, next) => {

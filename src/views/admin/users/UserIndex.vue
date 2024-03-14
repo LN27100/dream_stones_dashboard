@@ -1,35 +1,35 @@
 <template>
-    <div>
-      <h1>Liste des administrateurs</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Email</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="admin in admins" :key="admin.id">
-            <td>{{ admin.id }}</td>
-            <td>{{ admin.last_name }}</td>
-            <td>{{ admin.first_name }}</td>
-            <td>{{ admin.email }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </template>
-  
-  <script>
-import axios from 'axios';
+  <div>
+    <h1>Liste des administrateurs</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="admin in admins" :key="admin.id">
+          <td>{{ admin.id }}</td>
+          <td>{{ admin.last_name }}</td>
+          <td>{{ admin.first_name }}</td>
+          <td>{{ admin.email }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</template>
+
+<script>
+import axios from "axios";
 
 export default {
-  name: 'UserIndex',
+  name: "UserIndex",
   data() {
     return {
-      admins: []
+      admins: [],
     };
   },
   async mounted() {
@@ -38,31 +38,38 @@ export default {
   methods: {
     async getAdmins() {
       try {
-        const response = await axios.get('http://localhost:3000/admins');
+        const response = await axios.get("http://localhost:3000/admins");
         this.admins = response.data.admins;
       } catch (error) {
-        console.error('Erreur lors de la récupération des administrateurs :', error);
+        console.error(
+          "Erreur lors de la récupération des administrateurs :",
+          error
+        );
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  th, td {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-  }
-  
-  th {
-    background-color: #f2f2f2;
-  }
-  </style>
-  
-  
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  color: white;
+  background-color: #0b533d;
+}
+
+td {
+  background-color: #6eb59d;
+}
+</style>

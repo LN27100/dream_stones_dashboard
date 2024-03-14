@@ -7,7 +7,7 @@
         <div class="col-md-3">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Total des pierres</h5>
+              <h6 class="card-title">Total des pierres</h6>
               <p class="recupText">{{ totalProducts }}</p>
             </div>
           </div>
@@ -15,7 +15,7 @@
         <div class="col-md-3">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Total des utilisateurs</h5>
+              <h6 class="card-title">Total des utilisateurs</h6>
               <p class="recupText">{{ totalUsers }}</p>
             </div>
           </div>
@@ -23,7 +23,7 @@
         <div class="col-md-3">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Total des commandes</h5>
+              <h6 class="card-title">Total des commandes</h6>
               <p class="recupText">{{ totalOrders }}</p>
             </div>
           </div>
@@ -31,7 +31,7 @@
         <div class="col-md-3">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Nombre de commandes validées</h5>
+              <h6 class="card-title">Commandes validées</h6>
               <p class="recupText">{{ totalValidatedOrders }}</p>
             </div>
           </div>
@@ -39,7 +39,7 @@
         <div class="col-md-3">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Nombre de commandes en attentes</h5>
+              <h6 class="card-title">Commandes en attentes</h6>
               <p class="recupText">{{ totalPendingOrders }}</p>
             </div>
           </div>
@@ -47,7 +47,7 @@
         <div class="col-md-3">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Stats catégories de pierres</h5>
+              <h6 class="card-title">Stats catégories de pierres</h6>
               <p class="recupText"></p>
             </div>
           </div>
@@ -126,6 +126,11 @@ export default {
 <style>
 /* Dashboard */
 
+
+h6 {
+  text-align: center;
+  color: black;
+}
 .dashboard-title {
   font-size: 2,5rem;
   color: #239670;
@@ -147,7 +152,7 @@ export default {
   -webkit-border-radius: 20px;
   border-radius: 20px;
   color: white;
-  padding: 1rem;
+  padding: 0,5remrem;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   margin-bottom: 2rem;
 }
@@ -155,5 +160,7 @@ export default {
 .recupText {
   color: white;
   text-decoration: none;
+  font-size: 3rem;
+  text-align: center;
 }
 </style>

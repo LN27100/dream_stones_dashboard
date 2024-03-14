@@ -46,6 +46,7 @@ export default {
 }
 
 h3 {
+  font-family: "Macondo", cursive;
   margin: 0; 
   text-align: center; 
   flex-grow: 1; /* occupe tout l'espace disponible */
