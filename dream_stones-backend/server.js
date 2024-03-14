@@ -203,7 +203,7 @@ app.post('/products', async (req, res) => {
 
 app.get('/products', async (req, res) => {
   try {
-    const products = await Product.findAll();
+    const products = await Product.findAll({ attributes: ['PRODUCT_ID', 'PRODUCT_REF', 'PRODUCT_DESC', 'PRODUCT_STOCK', 'PRODUCT_UNIT_PRICE', 'PRODUCT_ORIGIN_COUNTRY', 'PRODUCT_PICTURE', 'SPL_ID', 'TYPE_ID', 'PRODUCT_NAME', 'PRODUCT_COLOR'] });
 
     res.status(200).json({ products });
   } catch (error) {
