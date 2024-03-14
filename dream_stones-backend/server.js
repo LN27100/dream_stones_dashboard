@@ -19,6 +19,8 @@ const sequelize = new Sequelize('dream_stones_project', 'LN27100', '02111979Lh#'
   dialect: 'mysql'
 });
 
+// TABLE ADMIN
+
 class Admin extends Model {}
 Admin.init({
   id: {
@@ -72,6 +74,7 @@ sequelize.authenticate()
     }
   });
 
+
 app.post('/admins', async (req, res) => {
   const { last_name, first_name, email, password } = req.body;
 
@@ -93,6 +96,21 @@ app.post('/admins', async (req, res) => {
     res.status(500).json({ error: 'Erreur lors de la création de l\'administrateur' });
   }
 });
+
+// Route pour récupérer la liste des administrateurs
+app.get('/admins', async (req, res) => {
+  try {
+    const admins = await Admin.findAll({ 
+      attributes: ['id', 'last_name', 'first_name', 'email'] 
+    });
+
+    res.status(200).json({ admins });
+  } catch (error) {
+    console.error('Erreur lors de la récupération des administrateurs :', error);
+    res.status(500).json({ error: 'Erreur lors de la récupération des administrateurs' });
+  }
+});
+
 
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
@@ -213,6 +231,7 @@ app.post('/products', async (req, res) => {
   }
 });
 
+// Route pour récupérer la liste des pierres
 app.get('/products', async (req, res) => {
   try {
     const products = await Product.findAll({ attributes: ['PRODUCT_ID', 'PRODUCT_REF', 'PRODUCT_DESC', 'PRODUCT_STOCK', 'PRODUCT_UNIT_PRICE', 'PRODUCT_ORIGIN_COUNTRY', 'PRODUCT_PICTURE', 'SPL_ID', 'TYPE_ID', 'PRODUCT_NAME', 'PRODUCT_COLOR'] });

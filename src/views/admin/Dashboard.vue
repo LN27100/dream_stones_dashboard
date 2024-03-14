@@ -24,7 +24,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Total des commandes</h5>
-              <p class="card-text"></p>
+              <p class="card-text">{{ totalOrders }}</p>
             </div>
           </div>
         </div>
@@ -32,7 +32,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Nombre de commandes validées</h5>
-              <p class="card-text"></p>
+              <p class="card-text">{{ totalValidatedOrders }}</p>
             </div>
           </div>
         </div>
@@ -40,7 +40,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Nombre de commandes en attentes</h5>
-              <p class="card-text"></p>
+              <p class="card-text">{{ totalPendingOrders }}</p>
             </div>
           </div>
         </div>
@@ -63,14 +63,43 @@ export default {
   data() {
     return {
       totalProducts: 0,
-      totalUsers: 0 
+      totalUsers: 0,
+      totalOrders: 0,
+      totalValidatedOrders: 0,
+      totalPendingOrders: 0
     };
   },
   mounted() {
     this.fetchTotalProducts();
     this.fetchTotalUsers();
+    this.fetchTotalOrders();
+    this.fetchOrderStatusCount();
+
   },
   methods: {
+        // Fonction pour récupérer le total des commandes validées et en attentes
+
+    async fetchOrderStatusCount() {
+      try {
+        const response = await fetch('http://localhost:3000/dashboard/orderStatusCount');
+        const data = await response.json();
+        this.totalValidatedOrders = data.nombre_validées;
+        this.totalPendingOrders = data.nombre_en_attente;
+      } catch (error) {
+        console.error('Erreur lors de la récupération du nombre de commandes par statut :', error);
+      }
+    },
+    // Fonction pour récupérer le total des commandes
+    async fetchTotalOrders() {
+      try {
+        const response = await fetch('http://localhost:3000/orders/count');
+        const data = await response.json();
+        this.totalOrders = data.total_orders;
+      } catch (error) {
+        console.error('Erreur lors de la récupération du nombre total de commandes :', error);
+      }
+    },
+        // Fonction pour récupérer le total des produits
     async fetchTotalProducts() {
       try {
         const response = await fetch('http://localhost:3000/dashboard/totalStones');
@@ -80,6 +109,7 @@ export default {
         console.error('Erreur lors de la récupération du nombre total de produits :', error);
       }
     },
+        // Fonction pour récupérer le total des utilisateurs
     async fetchTotalUsers() {
       try {
         const response = await fetch('http://localhost:3000/userprofiles/count');
