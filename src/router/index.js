@@ -34,17 +34,18 @@ const routes = [
       { path: "Dreamstones/edit/:id(\\d+)", component: DreamStonesEdit, props: true },
     ],
     // Fonction de garde pour empêcher l'accès au portail admin si non connecté.
-    // beforeEnter: (to, from, next) => {
-    //   // Vérifiez si l'utilisateur est connecté
-    //   const loggedIn = localStorage.getItem("user");
-    //   if (!loggedIn) {
-    //     // Utilisateur non connecté, rediriger vers la page de connexion
-    //     next({ name: "Login" });
-    //   } else {
-    //     // Utilisateur connecté, autoriser l'accès à la route
-    //     next();
-    //   }
-    // },
+    beforeEnter: (to, from, next) => {
+      // Vérifiez si l'utilisateur est connecté en consultant le stockage local
+      const loggedIn = localStorage.getItem("loggedIn");
+      if (!loggedIn) {
+        // Utilisateur non connecté, redirigez vers la page de connexion
+        next({ name: "Login" });
+      } else {
+        // Utilisateur connecté, autorisez l'accès à la route
+        next();
+      }
+    },
+    
   },
   {
     path: "/login",

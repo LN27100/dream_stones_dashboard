@@ -59,15 +59,17 @@ export default {
         .post("http://localhost:3000/login", data)
         .then((response) => {
           if (response.data.success) {
-            // Rediriger vers le tableau de bord en cas de succès
+            // Enregistrez le statut de l'utilisateur connecté dans le stockage local
+            localStorage.setItem("loggedIn", true);
+            // Redirigez vers le tableau de bord en cas de succès
             this.$router.push({ name: "dashboard" });
           } else {
-            // Afficher un message d'erreur en cas d'échec
+            // Affichez un message d'erreur en cas d'échec
             this.errorMessage = response.data.message;
           }
         })
         .catch((error) => {
-          // Gérer les erreurs de requête
+          // Gérez les erreurs de requête
           console.error("Erreur lors de la connexion:", error);
           this.errorMessage =
             "Une erreur s'est produite lors de la connexion. Veuillez réessayer.";
