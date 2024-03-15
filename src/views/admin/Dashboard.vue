@@ -199,7 +199,6 @@ export default {
         },
       });
     },
-
     getColorCode(color) {
       // Retourne le code couleur pour chaque couleur spécifiée
       switch (color) {
@@ -216,29 +215,7 @@ export default {
         case "jaune":
           return "#ffff00";
         case "multicolore":
-          return [
-            {
-              // Couleur 1
-              start: "rgba(86, 85, 103, 1)",
-              end: "rgba(9, 121, 120, 1)",
-              startPosition: { x: 0, y: 0 },
-              endPosition: { x: 0, y: 0.38 },
-            },
-            {
-              // Couleur 2
-              start: "rgba(9, 121, 120, 1)",
-              end: "rgba(255, 0, 249, 1)",
-              startPosition: { x: 0, y: 0.38 },
-              endPosition: { x: 0, y: 0.91 },
-            },
-            {
-              // Couleur 3
-              start: "rgba(255, 0, 249, 1)",
-              end: "rgba(255, 0, 249, 1)",
-              startPosition: { x: 0, y: 0.91 },
-              endPosition: { x: 0, y: 1 },
-            },
-          ];
+          return "#9b8989";
         case "marron":
           return "#663300";
         case "rose":
@@ -247,7 +224,6 @@ export default {
           return "#000000";
       }
     },
-
     async fetchOrderStatusCount() {
       try {
         const response = await fetch(
@@ -263,7 +239,6 @@ export default {
         );
       }
     },
-
     async fetchTotalOrders() {
       try {
         const response = await fetch("http://localhost:3000/orders/count");
@@ -309,6 +284,7 @@ export default {
   },
 };
 </script>
+
 
 <style>
 /* Dashboard */

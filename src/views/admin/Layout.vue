@@ -5,10 +5,7 @@
         <div id="ad_side">
             <AdminNav />
         </div>
-
-        <div id="ad_display">
             <Router-view />
-        </div>
     </div>
 
   </div>
@@ -42,8 +39,5 @@ export default {
 
 }
 
-#ad_display {
-    text-align: left;
-}
 
 </style>

@@ -58,6 +58,11 @@ h1 {
 
 /* tableaux */
 
+.table-container {
+  margin: 0 auto; /* Centrer horizontalement */
+  width: 80%; /* Largeur du conteneur */
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -78,6 +83,7 @@ th {
 td {
   background-color: #6eb59d;
 }
+
 /* card add */
 
 .input-container {

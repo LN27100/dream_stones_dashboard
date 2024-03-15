@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="table-container">
     <h1>Liste des pierres et minéraux</h1>
     <table>
       <thead>

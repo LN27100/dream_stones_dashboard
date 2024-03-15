@@ -1,5 +1,5 @@
 <template>
-    <div>
+  <div class="table-container">
       <h1>Stocks des pierres</h1>
       <table>
         <thead>

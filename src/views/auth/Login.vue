@@ -64,11 +64,9 @@ export default {
         .post("http://localhost:3000/login", data)
         .then((response) => {
           if (response.data.success) {
-            // Stocker l'ID de l'utilisateur dans localStorage
             localStorage.setItem("loggedIn", true);
-            localStorage.setItem("userId", response.data.userId);
-            // Rediriger l'utilisateur vers AdminHeader.vue avec l'ID de l'utilisateur
-            this.$router.push({ name: "admin", params: { userId: "userId" } });
+            // Rediriger l'utilisateur vers Dashboard.vue
+            this.$router.push({ name: "dashboard"});
             // Réinitialisation de l'erreur en cas de succès de la connexion
             this.errorMessage = "";
           } else {
