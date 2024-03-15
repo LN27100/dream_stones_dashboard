@@ -19,7 +19,7 @@ export default {
 #app > nav {
   background-color: #0b533d;
   padding-top: 1.5rem;
-  height: 3.8rem;
+  height: 4.5rem;
 }
 
 img {
@@ -27,7 +27,7 @@ img {
   left: 1rem;
   height: 5rem;
   box-shadow: 0 0 25px 10px rgba(255, 255, 255, 0.5);
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .divider {

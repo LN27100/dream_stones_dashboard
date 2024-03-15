@@ -141,7 +141,7 @@
   <style>
 
 .containerReg {
-    border-radius: 20px;
+  border-radius: 20px;
   width: 40rem;
   margin-left: 17rem;
   padding: 1rem;

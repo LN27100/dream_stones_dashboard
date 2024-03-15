@@ -1,5 +1,5 @@
 <template>
-  <div class="containerUsage">
+    <div class="containerHome">
     <h1>Connexion</h1>
 
     <!-- au moment où je submit, je dis d'aller à la méthode login (écoute du submit)-->
@@ -91,15 +91,19 @@ export default {
 }
 
 .containerUsage {
-  padding: 1rem 15rem 1rem 15rem;
-  background: linear-gradient(
-    0deg,
-    rgba(34, 193, 195, 1) 14%,
-    rgba(91, 189, 158, 1) 60%
-  );
-  width: 10rem;
-  margin: 0 auto;
-  margin-top: 1rem;
+  border-radius: 20px;
+  width: 40rem;
+  margin-left: 17rem;
+  padding: 1rem;
+  background: linear-gradient(0deg, rgba(34, 193, 195, 1) 14%, rgba(91, 189, 158, 1) 60%);
+  /* ombrage card */
+  -webkit-box-shadow: 10px 15px 5px 3px #6eb59d;
+  -moz-box-shadow: 10px 15px 5px 3px #6eb59d;
+  filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=10, OffY=15, Color='#6eb59d', Positive='true');
+  zoom: 1;
+  box-shadow: 10px 15px 5px 3px #6eb59d;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
 }
 
 *,
