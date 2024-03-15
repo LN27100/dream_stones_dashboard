@@ -10,6 +10,8 @@
           v-model="adminData.last_name"
           required
         />
+        <!-- contrôle de champs obligatoire -->
+        <span v-if="!adminData.last_name" class="required-label">*</span>
       </div>
       <div class="input-container">
         <label for="first_name">Prénom:</label>
@@ -19,8 +21,9 @@
           v-model="adminData.first_name"
           required
         />
+        <span v-if="!adminData.first_name" class="required-label">*</span>
       </div>
-        <div class="input-container">
+      <div class="input-container">
         <label for="email">Email:</label>
         <input
           type="email"
@@ -29,6 +32,7 @@
           required
           autocomplete="username"
         />
+        <span v-if="!adminData.email" class="required-label">*</span>
       </div>
       <div class="input-container">
         <label for="password">Mot de passe:</label>
@@ -38,10 +42,19 @@
           v-model="adminData.password"
           required
           autocomplete="new-password"
+          @click="showPasswordConditions = !showPasswordConditions"
         />
+        <span v-if="!adminData.password" class="required-label">*</span>
+        <div class="password-conditions" :class="{ 'visible': showPasswordConditions }">
+          <div :class="{ 'condition-failed': !hasMinimumLength, 'condition-passed': hasMinimumLength }">Au moins 8 caractères</div>
+          <div :class="{ 'condition-failed': !hasLowerCase, 'condition-passed': hasLowerCase }">Une lettre minuscule</div>
+          <div :class="{ 'condition-failed': !hasUpperCase, 'condition-passed': hasUpperCase }">Une lettre majuscule</div>
+          <div :class="{ 'condition-failed': !hasNumber, 'condition-passed': hasNumber }">Un chiffre</div>
+          <div :class="{ 'condition-failed': !hasSpecialChar, 'condition-passed': hasSpecialChar }">Un caractère spécial</div>
+        </div>
       </div>
       <div class="button-container">
-      <button type="submit">Ajouter</button>
+        <button type="submit" :disabled="!isValidPassword">Ajouter</button>
       </div>
     </form>
     <p class="message" v-if="message">{{ message }}</p>
@@ -61,10 +74,42 @@ export default {
         password: "",
       },
       message: "",
+      showPasswordConditions: false,
     };
+  },
+  computed: {
+    isValidPassword() {
+      return (
+        this.hasMinimumLength &&
+        this.hasLowerCase &&
+        this.hasUpperCase &&
+        this.hasNumber &&
+        this.hasSpecialChar
+      );
+    },
+    hasMinimumLength() {
+      return this.adminData.password.length >= 8;
+    },
+    hasLowerCase() {
+      return /[a-z]/.test(this.adminData.password);
+    },
+    hasUpperCase() {
+      return /[A-Z]/.test(this.adminData.password);
+    },
+    hasNumber() {
+      return /\d/.test(this.adminData.password);
+    },
+    hasSpecialChar() {
+      return /[!@#$%^&*()_+]/.test(this.adminData.password);
+    },
   },
   methods: {
     async addAdmin() {
+      if (!this.isValidPassword) {
+        this.message = "Le mot de passe ne respecte pas les critères requis.";
+        return; // Ne continuez pas si le mot de passe est invalide
+      }
+      
       try {
         const response = await axios.post(
           "http://localhost:3000/admins",
@@ -82,13 +127,11 @@ export default {
 </script>
 
 <style>
-
 .containerReg {
-    border-radius: 20px;
+  border-radius: 20px;
   width: 60rem;
   margin: 0 auto;
   background: linear-gradient(0deg, rgba(34, 193, 195, 1) 14%, rgba(91, 189, 158, 1) 60%);
-  /* ombrage card */
   -webkit-box-shadow: 10px 15px 5px 3px #6eb59d;
   -moz-box-shadow: 10px 15px 5px 3px #6eb59d;
   filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=10, OffY=15, Color='#6eb59d', Positive='true');
@@ -97,7 +140,40 @@ export default {
   -moz-border-radius: 20px;
   -webkit-border-radius: 20px;
   border-radius: 20px;
-  }
+}
+
+.input-container {
+  position: relative;
+}
+
+.required-label {
+  position: absolute;
+  top: 5px;
+  right: -15px;
+  color: red;
+  font-size: 1rem;
+}
+
+.password-conditions {
+  margin-top: 5px;
+  display: none;
+}
+
+.password-conditions.visible {
+  display: block;
+}
+
+.password-conditions div {
+  font-size: 0.9rem;
+}
+
+.condition-failed {
+  color: red;
+}
+
+.condition-passed {
+  color: green;
+}
 
 p.message {
   color: #0B533D;
