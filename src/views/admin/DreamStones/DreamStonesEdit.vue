@@ -2,7 +2,13 @@
   <div>
     <h1>Sélectionner une pierre</h1>
     <select v-model="selectedProductId" @change="fetchProductDetails">
-      <option v-for="productId in productIds" :key="productId" :value="productId">{{ productId }}</option>
+      <option
+        v-for="productId in productIds"
+        :key="productId"
+        :value="productId"
+      >
+        {{ productId }}
+      </option>
     </select>
 
     <div v-if="selectedProduct">
@@ -12,49 +18,79 @@
       <p class="recupText2">Référence: {{ selectedProduct.PRODUCT_REF }}</p>
       <p class="recupText2">Nom: {{ selectedProduct.PRODUCT_NAME }}</p>
       <p class="recupText2">Description: {{ selectedProduct.PRODUCT_DESC }}</p>
-      <p class="recupText2">Pays d'origine: {{ selectedProduct.PRODUCT_ORIGIN_COUNTRY }}</p>
+      <p class="recupText2">
+        Pays d'origine: {{ selectedProduct.PRODUCT_ORIGIN_COUNTRY }}
+      </p>
       <p class="recupText2">Couleur: {{ selectedProduct.PRODUCT_COLOR }}</p>
       <p class="recupText2">Stock: {{ selectedProduct.PRODUCT_STOCK }}</p>
-      <p class="recupText2">Prix unitaire: {{ selectedProduct.PRODUCT_UNIT_PRICE }}€</p>
+      <p class="recupText2">
+        Prix unitaire: {{ selectedProduct.PRODUCT_UNIT_PRICE }}€
+      </p>
 
-      <!-- Bouton Modifier -->
+      <!-- Modifier une pierre -->
       <button class="btn2" @click="showEditForm">Modifier</button>
+      <!-- Supprimer une pierre -->
+      <button class="btn2" @click="confirmDelete">Supprimer</button>
 
       <!-- Formulaire de modification -->
       <div v-if="showEditFormFlag">
         <h2>Modifier la pierre</h2>
         <form @submit.prevent="updateProduct">
           <label for="ref">Référence:</label>
-          <input type="text" id="ref" v-model="updatedProduct.PRODUCT_REF"><br>
+          <input
+            type="text"
+            id="ref"
+            v-model="updatedProduct.PRODUCT_REF"
+          /><br />
 
           <label for="name">Nom:</label>
-          <input type="text" id="name" v-model="updatedProduct.PRODUCT_NAME"><br>
+          <input
+            type="text"
+            id="name"
+            v-model="updatedProduct.PRODUCT_NAME"
+          /><br />
 
           <label for="desc">Description:</label>
-          <textarea id="desc" v-model="updatedProduct.PRODUCT_DESC"></textarea><br>
+          <textarea id="desc" v-model="updatedProduct.PRODUCT_DESC"></textarea
+          ><br />
 
           <label for="origin">Pays d'origine:</label>
-          <input type="text" id="origin" v-model="updatedProduct.PRODUCT_ORIGIN_COUNTRY"><br>
+          <input
+            type="text"
+            id="origin"
+            v-model="updatedProduct.PRODUCT_ORIGIN_COUNTRY"
+          /><br />
 
           <label for="color">Couleur:</label>
-          <input type="text" id="color" v-model="updatedProduct.PRODUCT_COLOR"><br>
+          <input
+            type="text"
+            id="color"
+            v-model="updatedProduct.PRODUCT_COLOR"
+          /><br />
 
           <label for="stock">Stock:</label>
-          <input type="number" id="stock" v-model="updatedProduct.PRODUCT_STOCK"><br>
+          <input
+            type="number"
+            id="stock"
+            v-model="updatedProduct.PRODUCT_STOCK"
+          /><br />
 
           <label for="price">Prix unitaire:</label>
-          <input type="number" id="price" v-model="updatedProduct.PRODUCT_UNIT_PRICE"><br>
+          <input
+            type="number"
+            id="price"
+            v-model="updatedProduct.PRODUCT_UNIT_PRICE"
+          /><br />
 
           <button type="submit">Enregistrer</button>
         </form>
       </div>
-
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   data() {
@@ -64,14 +100,14 @@ export default {
       selectedProduct: null,
       showEditFormFlag: false,
       updatedProduct: {
-        PRODUCT_REF: '',
-        PRODUCT_NAME: '',
-        PRODUCT_DESC: '',
-        PRODUCT_ORIGIN_COUNTRY: '',
-        PRODUCT_COLOR: '',
+        PRODUCT_REF: "",
+        PRODUCT_NAME: "",
+        PRODUCT_DESC: "",
+        PRODUCT_ORIGIN_COUNTRY: "",
+        PRODUCT_COLOR: "",
         PRODUCT_STOCK: 0,
-        PRODUCT_UNIT_PRICE: 0
-      }
+        PRODUCT_UNIT_PRICE: 0,
+      },
     };
   },
   mounted() {
@@ -80,18 +116,28 @@ export default {
   methods: {
     async fetchProductIds() {
       try {
-        const response = await axios.get('http://localhost:3000/products');
-        this.productIds = response.data.products.map(product => product.PRODUCT_ID);
+        const response = await axios.get("http://localhost:3000/products");
+        this.productIds = response.data.products.map(
+          (product) => product.PRODUCT_ID
+        );
       } catch (error) {
-        console.error('Erreur lors de la récupération des IDs des produits :', error);
+        console.error(
+          "Erreur lors de la récupération des IDs des produits :",
+          error
+        );
       }
     },
     async fetchProductDetails() {
       try {
-        const response = await axios.get(`http://localhost:3000/products/${this.selectedProductId}`);
+        const response = await axios.get(
+          `http://localhost:3000/products/${this.selectedProductId}`
+        );
         this.selectedProduct = response.data.product;
       } catch (error) {
-        console.error('Erreur lors de la récupération des détails de la pierre :', error);
+        console.error(
+          "Erreur lors de la récupération des détails de la pierre :",
+          error
+        );
       }
     },
     showEditForm() {
@@ -101,14 +147,35 @@ export default {
     },
     async updateProduct() {
       try {
-        await axios.put(`http://localhost:3000/products/${this.selectedProductId}`, this.updatedProduct);
+        await axios.put(
+          `http://localhost:3000/products/${this.selectedProductId}`,
+          this.updatedProduct
+        );
         await this.fetchProductDetails(); // Actualiser les détails de la pierre après la mise à jour
         this.showEditFormFlag = false; // Masquer le formulaire de modification
       } catch (error) {
-        console.error('Erreur lors de la mise à jour du produit :', error);
+        console.error("Erreur lors de la mise à jour du produit :", error);
       }
-    }
-  }
+    },
+    confirmDelete() {
+      if (confirm("Êtes-vous sûr de vouloir supprimer ce produit ?")) {
+        this.deleteProduct();
+      }
+    },
+    async deleteProduct() {
+      try {
+        await axios.delete(
+          `http://localhost:3000/products/${this.selectedProductId}`
+        );
+        alert("Produit supprimé avec succès !");
+        // Redirection vers le dashboard après la suppression
+        this.$router.push("/admin/dashboard");
+      } catch (error) {
+        console.error("Erreur lors de la suppression du produit :", error);
+        alert("Erreur lors de la suppression du produit. Veuillez réessayer.");
+      }
+    },
+  },
 };
 </script>
 
