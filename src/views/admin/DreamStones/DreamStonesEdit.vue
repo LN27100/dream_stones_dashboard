@@ -38,11 +38,15 @@
       },
       async fetchProductDetails() {
         try {
+            console.log('fetchProductDetails() called with selectedProductId:', this.selectedProductId);
+
           // Récupère les détails de la pierre sélectionnée depuis le backend
           const response = await axios.get(`http://localhost:3000/products/${this.selectedProductId}`);
           this.selectedProduct = response.data.product;
         } catch (error) {
           console.error('Erreur lors de la récupération des détails de la pierre :', error);
+          console.log('Error response:', error.response);
+
         }
       }
     }

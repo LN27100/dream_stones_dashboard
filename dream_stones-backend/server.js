@@ -269,11 +269,21 @@ app.get('/products', async (req, res) => {
 app.get('/products/:id', async (req, res) => {
   const productId = req.params.id;
 
+  console.log('Tentative de récupération des détails du produit avec l\'ID :', productId);
+
   try {
     // Logique pour récupérer les détails du produit en fonction de l'ID
     const product = await Product.findByPk(productId);
 
+    // Vérifier si le produit a été trouvé
+    if (!product) {
+      // Si le produit n'est pas trouvé, retourner une erreur 404 avec un message approprié
+      console.log('Produit non trouvé pour l\'ID :', productId);
+      return res.status(404).json({ error: 'Produit non trouvé' });
+    }
+
     // Envoyer les détails du produit en réponse
+    console.log('Détails du produit récupérés avec succès pour l\'ID :', productId);
     res.status(200).json({ product });
   } catch (error) {
     // Gérer les erreurs
@@ -281,6 +291,9 @@ app.get('/products/:id', async (req, res) => {
     res.status(500).json({ error: 'Erreur lors de la récupération des détails du produit' });
   }
 });
+
+
+
 
 
 // ROUTE pour METTRE A JOUR (UPDATE) une PIERRE
