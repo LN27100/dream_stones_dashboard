@@ -64,13 +64,11 @@ export default {
   name: "DashboardPage",
   data() {
     return {
-      cards: [
-        { title: "Total des pierres", value: 0 },
-        { title: "Total des utilisateurs", value: 0 },
-        { title: "Total des commandes", value: 0 },
-        { title: "Commandes validées", value: 0 },
-        { title: "Commandes en attentes", value: 0 }
-      ],
+      totalProducts: 0,
+      totalUsers: 0,
+      totalOrders: 0,
+      totalValidatedOrders: 0,
+      totalPendingOrders: 0,
       stoneColorsData: []
     };
   },
@@ -166,47 +164,68 @@ export default {
           return '#000000'; // Couleur par défaut si non spécifiée
       }
     },
+    // Fonction pour récupérer le total des commandes validées et en attentes
     async fetchOrderStatusCount() {
       try {
-        const response = await fetch('http://localhost:3000/dashboard/orderStatusCount');
+        const response = await fetch(
+          "http://localhost:3000/dashboard/orderStatusCount"
+        );
         const data = await response.json();
-        this.cards[3].value = data.nombre_validées;
-        this.cards[4].value = data.nombre_en_attente;
+        this.totalValidatedOrders = data.nombre_validées;
+        this.totalPendingOrders = data.nombre_en_attente;
       } catch (error) {
-        console.error('Erreur lors de la récupération du nombre de commandes par statut :', error);
+        console.error(
+          "Erreur lors de la récupération du nombre de commandes par statut :",
+          error
+        );
       }
     },
+    // Fonction pour récupérer le total des commandes
     async fetchTotalOrders() {
       try {
-        const response = await fetch('http://localhost:3000/orders/count');
+        const response = await fetch("http://localhost:3000/orders/count");
         const data = await response.json();
-        this.cards[2].value = data.total_orders;
+        this.totalOrders = data.total_orders;
       } catch (error) {
-        console.error('Erreur lors de la récupération du nombre total de commandes :', error);
+        console.error(
+          "Erreur lors de la récupération du nombre total de commandes :",
+          error
+        );
       }
     },
+    // Fonction pour récupérer le total des produits
     async fetchTotalProducts() {
       try {
-        const response = await fetch('http://localhost:3000/dashboard/totalStones');
+        const response = await fetch(
+          "http://localhost:3000/dashboard/totalStones"
+        );
         const data = await response.json();
-        this.cards[0].value = data.total_stones;
+        this.totalProducts = data.total_stones;
       } catch (error) {
-        console.error('Erreur lors de la récupération du nombre total de produits :', error);
+        console.error(
+          "Erreur lors de la récupération du nombre total de produits :",
+          error
+        );
       }
     },
+    // Fonction pour récupérer le total des utilisateurs
     async fetchTotalUsers() {
       try {
-        const response = await fetch('http://localhost:3000/userprofiles/count');
+        const response = await fetch(
+          "http://localhost:3000/userprofiles/count"
+        );
         const data = await response.json();
-        this.cards[1].value = data.total_userprofiles;
+        this.totalUsers = data.total_userprofiles;
       } catch (error) {
-        console.error('Erreur lors de la récupération du nombre total d\'utilisateurs :', error);
+        console.error(
+          "Erreur lors de la récupération du nombre total d'utilisateurs :",
+          error
+        );
       }
     },
   },
 };
 </script>
-
 
 <style>
 /* Dashboard */
