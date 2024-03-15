@@ -449,7 +449,6 @@ app.get('/orders/pending', async (req, res) => {
 // ROUTE pour RECUPERER le NOMBRE de commandes VALIDEES et le NOMBRE de commandes EN ATTENTE (ORDERS)
 app.get('/dashboard/orderStatusCount', async (req, res) => {
   try {
-    // Exécutez la requête SQL pour obtenir le nombre de commandes avec chaque statut
     const [result] = await sequelize.query(`
       SELECT 
         SUM(CASE WHEN ORDER_STATUS = 'validée' THEN 1 ELSE 0 END) AS nombre_validées,
@@ -458,7 +457,6 @@ app.get('/dashboard/orderStatusCount', async (req, res) => {
         orders;
     `);
 
-    // Renvoyez les résultats au format JSON
     res.status(200).json({ 
       nombre_validées: result[0].nombre_validées,
       nombre_en_attente: result[0].nombre_en_attente

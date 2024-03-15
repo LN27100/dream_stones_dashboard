@@ -2,9 +2,9 @@
   <div>
     <!-- Dashboard -->
     <main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4">
-      <h1 class="mt-3 dashboard-title">Dashboard</h1>
-      <div class="row mt-3">
-        <div class="col-md-3 mr-4">
+      <h1 class="mt-3 dashboard-title">Dashboard Dream Stones</h1>
+      <div class="row mt-">
+        <div class="col-md-3 mr-2">
           <div class="card">
             <div class="card-body">
               <h6 class="card-title">Total des pierres</h6>
@@ -12,7 +12,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-3 mr-4">
+        <div class="col-md-3 mr-2">
           <div class="card">
             <div class="card-body">
               <h6 class="card-title">Total des utilisateurs</h6>
@@ -20,7 +20,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-3 mr-4">
+        <div class="col-md-3 mr-2">
           <div class="card">
             <div class="card-body">
               <h6 class="card-title">Total des commandes</h6>
@@ -28,7 +28,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-3 mr-4">
+        <div class="col-md-3 mr-2">
           <div class="card">
             <div class="card-body">
               <h6 class="card-title">Commandes validées</h6>
@@ -36,7 +36,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-3 mr-4">
+        <div class="col-md-3 mr-2">
           <div class="card">
             <div class="card-body">
               <h6 class="card-title">Commandes en attentes</h6>
@@ -44,7 +44,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-3 mr-4">
+        <div class="col-md-3 mr-2">
           <div class="card">
             <div class="card-body">
               <h6 class="card-title">Total des pierres</h6>
@@ -52,7 +52,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-3 mr-4">
+        <div class="col-md-3 mr-2">
           <div class="card">
             <div class="card-body">
               <h6 class="card-title">Stats couleur de pierres</h6>
@@ -306,7 +306,7 @@ h6 {
   color: black;
 }
 .dashboard-title {
-  font-size: 2, 5rem;
+  font-size: 3rem;
   color: #239670;
 }
 
@@ -326,9 +326,8 @@ h6 {
   -webkit-border-radius: 20px;
   border-radius: 20px;
   color: white;
-  padding: 0, 2rem;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   width: 20rem;
 }
 

@@ -1,6 +1,6 @@
 <template>
   <div class="ad_head">
-    <h3>Bienvenue {{ firstName }}</h3>
+    <div class="spacer"></div>
     <button class="btn3" @click="logout">Déconnexion</button>
   </div>
 </template>
@@ -42,18 +42,14 @@ export default {
 .ad_head {
   border-bottom: solid 1px black;
   background-color: #0b533d;
-  height: 3rem;
+  height: 1.5rem;
   color: white;
   display: flex;
   align-items: center; 
-  justify-content: space-between;
 }
 
-h3 {
-  font-family: "Macondo", cursive;
-  margin: 0; 
-  text-align: center; 
-  flex-grow: 1; /* occupe tout l'espace disponible */
+.spacer {
+  flex: 1; 
 }
 
 .btn3 {
@@ -64,6 +60,9 @@ h3 {
   color: white;
   border-radius: 5px;
   box-shadow: inset 2px 2px 3px rgba(255, 255, 255, 0.6), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+  margin-left: auto;
+  margin-right: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .btn3:hover {

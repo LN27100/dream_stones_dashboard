@@ -64,8 +64,11 @@ export default {
         .post("http://localhost:3000/login", data)
         .then((response) => {
           if (response.data.success) {
+            // Stocker l'ID de l'utilisateur dans localStorage
             localStorage.setItem("loggedIn", true);
-            this.$router.push({ name: "dashboard" });
+            localStorage.setItem("userId", response.data.userId);
+            // Rediriger l'utilisateur vers AdminHeader.vue avec l'ID de l'utilisateur
+            this.$router.push({ name: "admin", params: { userId: "userId" } });
             // Réinitialisation de l'erreur en cas de succès de la connexion
             this.errorMessage = "";
           } else {
@@ -84,7 +87,7 @@ export default {
 
 <style>
 .error-message {
-  color: red
+  color: red;
 }
 
 .containerUsage {

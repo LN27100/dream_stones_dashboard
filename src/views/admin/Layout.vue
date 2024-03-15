@@ -43,7 +43,6 @@ export default {
 }
 
 #ad_display {
-    padding: 1rem;
     text-align: left;
 }
 

@@ -47,25 +47,6 @@
   </script>
   
   <style scoped>
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  th,
-  td {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-  }
-  
-  th {
-    color: white;
-    background-color: #0b533d;
-  }
-  
-  td {
-    background-color: #6eb59d;
-  }
+ 
   </style>
   
