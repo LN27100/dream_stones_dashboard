@@ -1,15 +1,17 @@
 <template>
   <div>
-    <h1>Sélectionner une pierre</h1>
+    <h1>Détails d'une pierre</h1>
     <select v-model="selectedProductId" @change="fetchProductDetails">
-      <option
-        v-for="productId in productIds"
-        :key="productId"
-        :value="productId"
-      >
-        {{ productId }}
-      </option>
-    </select>
+  <option  selected value="">Choisissez un ID</option>
+  <option
+    v-for="productId in productIds"
+    :key="productId"
+    :value="productId"
+  >
+    {{ productId }}
+  </option>
+</select>
+
 
     <div v-if="selectedProduct">
       <h2>Détails de la pierre</h2>

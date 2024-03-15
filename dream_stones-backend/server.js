@@ -265,6 +265,27 @@ app.get('/products', async (req, res) => {
   }
 });
 
+// ROUTE pour RECUPERER les STATS sur les COULEURS des PIERRES
+app.get('/dashboard/stoneColors', async (req, res) => {
+  try {
+    const colorCounts = await Product.findAll({
+      attributes: ['PRODUCT_COLOR', [sequelize.fn('COUNT', sequelize.col('PRODUCT_COLOR')), 'count']],
+      group: ['PRODUCT_COLOR']
+    });
+
+    const stoneColors = colorCounts.map(colorCount => ({
+      color: colorCount.PRODUCT_COLOR,
+      count: colorCount.get('count')
+    }));
+
+    res.status(200).json({ stone_colors: stoneColors });
+  } catch (error) {
+    console.error('Erreur lors de la récupération des statistiques sur les couleurs des pierres :', error);
+    res.status(500).json({ error: 'Erreur lors de la récupération des statistiques sur les couleurs des pierres' });
+  }
+});
+
+
 // ROUTE pour RECUPERER les détails d'une PIERRE par son ID
 app.get('/products/:id', async (req, res) => {
   const productId = req.params.id;
@@ -291,9 +312,6 @@ app.get('/products/:id', async (req, res) => {
     res.status(500).json({ error: 'Erreur lors de la récupération des détails du produit' });
   }
 });
-
-
-
 
 
 // ROUTE pour METTRE A JOUR (UPDATE) une PIERRE

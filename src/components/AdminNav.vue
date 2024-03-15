@@ -15,11 +15,7 @@
       <li>
         <router-link to="/admin/users/add">Ajouter un admin</router-link>
       </li>
-      <li>
-        <router-link to="/admin/users/:id/edit/"
-          >Editer un admin</router-link
-        >
-      </li>
+  
       <li>&nbsp;</li>
 
       <p>Pierres :</p>

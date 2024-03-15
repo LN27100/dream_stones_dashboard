@@ -44,29 +44,34 @@
             </div>
           </div>
         </div>
-        <div class="col-md-3">
-          <div class="card">
-            <div class="card-body">
-              <h6 class="card-title">Stats catégories de pierres</h6>
-              <p class="recupText"></p>
+            <div class="col-md-3">
+              <div class="card">
+                <div class="card-body">
+                  <h6 class="card-title">Stats couleur de pierres</h6>
+                  <canvas id="stoneColorChart"></canvas>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
       </div>
     </main>
   </div>
 </template>
 
 <script>
+import Chart from 'chart.js/auto';
+
 export default {
   name: "DashboardPage",
   data() {
     return {
-      totalProducts: 0,
-      totalUsers: 0,
-      totalOrders: 0,
-      totalValidatedOrders: 0,
-      totalPendingOrders: 0
+      cards: [
+        { title: "Total des pierres", value: 0 },
+        { title: "Total des utilisateurs", value: 0 },
+        { title: "Total des commandes", value: 0 },
+        { title: "Commandes validées", value: 0 },
+        { title: "Commandes en attentes", value: 0 }
+      ],
+      stoneColorsData: []
     };
   },
   mounted() {
@@ -74,65 +79,144 @@ export default {
     this.fetchTotalUsers();
     this.fetchTotalOrders();
     this.fetchOrderStatusCount();
-
+    this.fetchStoneColorsData();
   },
   methods: {
-        // Fonction pour récupérer le total des commandes validées et en attentes
+    async fetchStoneColorsData() {
+      try {
+        const response = await fetch('http://localhost:3000/dashboard/stoneColors');
+        const data = await response.json();
+        this.stoneColorsData = data.stone_colors;
 
+        this.renderStoneColorChart();
+      } catch (error) {
+        console.error('Erreur lors de la récupération des données de couleurs de pierres :', error);
+      }
+    },
+    renderStoneColorChart() {
+      const ctx = document.getElementById('stoneColorChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: this.stoneColorsData.map(colorData => colorData.color),
+          datasets: [{
+            label: 'Nombre de pierres',
+            data: this.stoneColorsData.map(colorData => colorData.count),
+            backgroundColor: this.stoneColorsData.map(colorData => this.getColorCode(colorData.color)),
+          }]
+        },
+        options: {
+          plugins: {
+            legend: {
+              position: 'bottom'
+            },
+            title: {
+              display: true,
+              text: 'Nombre de pierres par couleurs'
+            }
+          }
+        }
+      });
+    },
+    getColorCode(color) {
+      // Retourne le code couleur pour chaque couleur spécifiée
+      switch(color) {
+        case 'bleue':
+          return '#0863cc';
+        case 'blanche':
+          return '#ffffff';
+        case 'verte':
+          return '#53ac32';
+        case 'rouge':
+          return '#ff1807';
+        case 'violette':
+          return '#990099';
+        case 'jaune':
+          return '#ffff00';
+          case 'multicolore':
+  return [
+    {
+      // Couleur 1 : rgba(86,85,103,1)
+      start: 'rgba(86, 85, 103, 1)',
+      end: 'rgba(9, 121, 120, 1)',
+      startPosition: { x: 0, y: 0 }, // Début en haut
+      endPosition: { x: 0, y: 0.38 } // 38% de la hauteur pour la première couleur
+    },
+    {
+      // Couleur 2 : rgba(9,121,120,1)
+      start: 'rgba(9, 121, 120, 1)',
+      end: 'rgba(255, 0, 249, 1)',
+      startPosition: { x: 0, y: 0.38 }, // 38% de la hauteur pour la deuxième couleur
+      endPosition: { x: 0, y: 0.91 } // 91% de la hauteur pour la troisième couleur
+    },
+    {
+      // Couleur 3 : rgba(255,0,249,1)
+      start: 'rgba(255, 0, 249, 1)',
+      end: 'rgba(255, 0, 249, 1)',
+      startPosition: { x: 0, y: 0.91 }, // 91% de la hauteur pour la troisième couleur
+      endPosition: { x: 0, y: 1 } // Fin en bas
+    }
+  ];
+
+        case 'marron':
+          return '#663300';
+        case 'rose':
+          return '#ff99cc';
+        default:
+          return '#000000'; // Couleur par défaut si non spécifiée
+      }
+    },
     async fetchOrderStatusCount() {
       try {
         const response = await fetch('http://localhost:3000/dashboard/orderStatusCount');
         const data = await response.json();
-        this.totalValidatedOrders = data.nombre_validées;
-        this.totalPendingOrders = data.nombre_en_attente;
+        this.cards[3].value = data.nombre_validées;
+        this.cards[4].value = data.nombre_en_attente;
       } catch (error) {
         console.error('Erreur lors de la récupération du nombre de commandes par statut :', error);
       }
     },
-    // Fonction pour récupérer le total des commandes
     async fetchTotalOrders() {
       try {
         const response = await fetch('http://localhost:3000/orders/count');
         const data = await response.json();
-        this.totalOrders = data.total_orders;
+        this.cards[2].value = data.total_orders;
       } catch (error) {
         console.error('Erreur lors de la récupération du nombre total de commandes :', error);
       }
     },
-        // Fonction pour récupérer le total des produits
     async fetchTotalProducts() {
       try {
         const response = await fetch('http://localhost:3000/dashboard/totalStones');
         const data = await response.json();
-        this.totalProducts = data.total_stones;
+        this.cards[0].value = data.total_stones;
       } catch (error) {
         console.error('Erreur lors de la récupération du nombre total de produits :', error);
       }
     },
-        // Fonction pour récupérer le total des utilisateurs
     async fetchTotalUsers() {
       try {
         const response = await fetch('http://localhost:3000/userprofiles/count');
         const data = await response.json();
-        this.totalUsers = data.total_userprofiles;
+        this.cards[1].value = data.total_userprofiles;
       } catch (error) {
         console.error('Erreur lors de la récupération du nombre total d\'utilisateurs :', error);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
+
 <style>
 /* Dashboard */
-
 
 h6 {
   text-align: center;
   color: black;
 }
 .dashboard-title {
-  font-size: 2,5rem;
+  font-size: 2, 5rem;
   color: #239670;
 }
 
@@ -152,7 +236,7 @@ h6 {
   -webkit-border-radius: 20px;
   border-radius: 20px;
   color: white;
-  padding: 0,5remrem;
+  padding: 0, 5remrem;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   margin-bottom: 2rem;
 }

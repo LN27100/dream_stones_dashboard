@@ -5,7 +5,6 @@ import Dashboard from "@/views/admin/Dashboard.vue";
 
 import UserIndex from "@/views/admin/users/UserIndex.vue";
 import UserAdd from "@/views/admin/users/UserAdd.vue";
-import UserEdit from "@/views/admin/users/UserEdit.vue";
 
 import DreamStonesIndex from "@/views/admin/DreamStones/DreamStonesIndex.vue";
 import DreamStonesAdd from "@/views/admin/DreamStones/DreamStonesAdd.vue";
@@ -31,7 +30,6 @@ const routes = [
       { path: "dashboard", name: "dashboard", component: Dashboard },
       { path: "users/index", component: UserIndex },
       { path: "users/add", component: UserAdd },
-      { path: "/admin/users/:id/edit/", component: UserEdit, props: true, },
       { path: "Dreamstones/index", component: DreamStonesIndex },
       { path: "Dreamstones/add", component: DreamStonesAdd },
       { path: "Dreamstones/edit/", component: DreamStonesEdit, props: true },
