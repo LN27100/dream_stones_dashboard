@@ -35,6 +35,14 @@
           >Editer une pierre</router-link
         >
       </li>
+
+      <li>&nbsp;</li>
+
+      <li>
+        <router-link to="/admin/Stocks/index/"
+          >Stock des produits</router-link
+        >
+      </li>
     </ul>
   </div>
 </template>

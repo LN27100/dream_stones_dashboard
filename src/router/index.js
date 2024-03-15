@@ -10,6 +10,7 @@ import DreamStonesIndex from "@/views/admin/DreamStones/DreamStonesIndex.vue";
 import DreamStonesAdd from "@/views/admin/DreamStones/DreamStonesAdd.vue";
 import DreamStonesEdit from "@/views/admin/DreamStones/DreamStonesEdit.vue";
 
+import StocksIndex from "@/views/admin/stocks/StocksIndex.vue";
 
 import Login from "@/views/auth/Login.vue";
 
@@ -33,7 +34,7 @@ const routes = [
       { path: "Dreamstones/index", component: DreamStonesIndex },
       { path: "Dreamstones/add", component: DreamStonesAdd },
       { path: "Dreamstones/edit/", component: DreamStonesEdit, props: true },
-
+      { path: "Stocks/index", component: StocksIndex },
     ],
     // Fonction de garde pour empêcher l'accès au portail admin si non connecté.
     beforeEnter: (to, from, next) => {
