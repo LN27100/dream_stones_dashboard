@@ -1,6 +1,6 @@
 <template>
   <div class="ad_head">
-    <h3>Bienvenue {{firstName}}</h3>
+    <h3>Bienvenue {{ firstName }}</h3>
     <button class="btn3" @click="logout">Déconnexion</button>
   </div>
 </template>
@@ -16,14 +16,18 @@ export default {
     };
   },
   mounted() {
-    // Récupérer le prénom de l'administrateur depuis la bdd
-    axios.get('http://localhost:3000/admins/:id/firstName') 
-      .then(response => {
-        this.firstName = response.data.first_name;
-      })
-      .catch(error => {
-        console.error('Erreur lors de la récupération du prénom de l\'administrateur :', error);
-      });
+    // Récupérer l'identifiant de l'administrateur depuis localStorage ou ailleurs
+    const userId = localStorage.getItem('userId');
+    if (userId) {
+      // Récupérer le prénom de l'administrateur depuis la base de données
+      axios.get(`http://localhost:3000/admins/${userId}`)
+        .then(response => {
+          this.firstName = response.data.admin.first_name;
+        })
+        .catch(error => {
+          console.error('Erreur lors de la récupération du prénom de l\'administrateur :', error);
+        });
+    }
   },
   methods: {
     logout() {
@@ -65,6 +69,4 @@ h3 {
 .btn3:hover {
   background-color: #57bc9a;
 }
-
-
 </style>

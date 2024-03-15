@@ -94,23 +94,25 @@ app.post('/admins', async (req, res) => {
   }
 });
 
-// ROUTE pour RECUPERER le PRENOM de l'administrateur par son identifiant
-app.get('/admins/:id/firstName', async (req, res) => {
+
+// ROUTE pour RECUPERER un ADMINISTRATEUR par son identifiant
+app.get('/admins/:id', async (req, res) => {
   const adminId = req.params.id;
 
   try {
-    const admin = await Admin.findByPk(adminId);
+    const admin = await Admin.findByPk(adminId, { attributes: ['id', 'last_name', 'first_name', 'email'] });
 
     if (!admin) {
       return res.status(404).json({ success: false, message: 'Administrateur non trouvé.' });
     }
 
-    return res.status(200).json({ success: true, firstName: admin.first_name });
+    return res.status(200).json({ success: true, admin });
   } catch (error) {
-    console.error('Erreur lors de la récupération du prénom de l\'administrateur :', error);
-    return res.status(500).json({ success: false, message: 'Une erreur s\'est produite lors de la récupération du prénom de l\'administrateur.' });
+    console.error('Erreur lors de la récupération de l\'administrateur :', error);
+    return res.status(500).json({ success: false, message: 'Une erreur s\'est produite lors de la récupération de l\'administrateur.' });
   }
 });
+
 
 // ROUTE pour RECUPERER la liste des ADMINISTRATEURS
 app.get('/admins', async (req, res) => {
@@ -262,6 +264,24 @@ app.get('/products', async (req, res) => {
     res.status(500).json({ error: 'Erreur lors de la récupération des produits' });
   }
 });
+
+// ROUTE pour RECUPERER les détails d'une PIERRE par son ID
+app.get('/products/:id', async (req, res) => {
+  const productId = req.params.id;
+
+  try {
+    // Logique pour récupérer les détails du produit en fonction de l'ID
+    const product = await Product.findByPk(productId);
+
+    // Envoyer les détails du produit en réponse
+    res.status(200).json({ product });
+  } catch (error) {
+    // Gérer les erreurs
+    console.error('Erreur lors de la récupération des détails du produit :', error);
+    res.status(500).json({ error: 'Erreur lors de la récupération des détails du produit' });
+  }
+});
+
 
 // ROUTE pour METTRE A JOUR (UPDATE) une PIERRE
 app.put('/products/:id', async (req, res) => {

@@ -31,10 +31,10 @@ const routes = [
       { path: "dashboard", name: "dashboard", component: Dashboard },
       { path: "users/index", component: UserIndex },
       { path: "users/add", component: UserAdd },
-      { path: "/admin/users/edit/:id", component: UserEdit, props: true, },
+      { path: "/admin/users/:id/edit/", component: UserEdit, props: true, },
       { path: "Dreamstones/index", component: DreamStonesIndex },
       { path: "Dreamstones/add", component: DreamStonesAdd },
-      { path: "Dreamstones/edit/:id", component: DreamStonesEdit, props: true },
+      { path: "Dreamstones/edit/", component: DreamStonesEdit, props: true },
 
     ],
     // Fonction de garde pour empêcher l'accès au portail admin si non connecté.

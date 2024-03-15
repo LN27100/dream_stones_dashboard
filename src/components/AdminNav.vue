@@ -16,7 +16,7 @@
         <router-link to="/admin/users/add">Ajouter un admin</router-link>
       </li>
       <li>
-        <router-link to="/admin/users/edit/:id"
+        <router-link to="/admin/users/:id/edit/"
           >Editer un admin</router-link
         >
       </li>
@@ -35,7 +35,7 @@
         >
       </li>
       <li>
-        <router-link to="/admin/DreamStones/edit/:id"
+        <router-link to="/admin/DreamStones/edit/"
           >Editer une pierre</router-link
         >
       </li>
