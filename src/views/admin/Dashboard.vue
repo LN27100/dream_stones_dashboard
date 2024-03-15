@@ -63,7 +63,7 @@
         <div class="col-md-3 mr-4">
           <div class="card">
             <div class="card-body">
-              <h6 class="card-title">Stats de vente et de stock</h6>
+              <h6 class="card-title">Stats de ventes mensuelles</h6>
               <canvas id="lineChart"></canvas>
             </div>
           </div>
@@ -87,7 +87,6 @@ export default {
       totalPendingOrders: 0,
       stoneColorsData: [],
       ordersByMonthData: [],
-      stocksByMonthData: [],
     };
   },
   mounted() {
@@ -95,35 +94,26 @@ export default {
     this.fetchTotalUsers();
     this.fetchTotalOrders();
     this.fetchOrderStatusCount();
-    this.fetchOrdersByMonth(); // Appel de la méthode pour récupérer les données des commandes par mois
-    this.fetchStocksByMonth(); // Appel de la méthode pour récupérer les données des stocks par mois
+    this.fetchOrdersByMonth();
     this.fetchStoneColorsData();
   },
   methods: {
     async fetchOrdersByMonth() {
       try {
-        const response = await fetch("http://localhost:3000/dashboard/ordersByMonth");
+        const response = await fetch(
+          "http://localhost:3000/dashboard/ordersByMonth"
+        );
         const data = await response.json();
         this.ordersByMonthData = data.orders_by_month;
 
         this.renderLineChart();
       } catch (error) {
-        console.error("Erreur lors de la récupération des données de commandes par mois :", error);
+        console.error(
+          "Erreur lors de la récupération des données de commandes par mois :",
+          error
+        );
       }
     },
-
-    async fetchStocksByMonth() {
-      try {
-        const response = await fetch("http://localhost:3000/dashboard/stocksByMonth");
-        const data = await response.json();
-        this.stocksByMonthData = data.stocks_by_month;
-
-        this.renderLineChart();
-      } catch (error) {
-        console.error("Erreur lors de la récupération des données de stocks par mois :", error);
-      }
-    },
-
     renderLineChart() {
       const ctx = document.getElementById("lineChart").getContext("2d");
       new Chart(ctx, {
@@ -134,15 +124,8 @@ export default {
             {
               label: "Nombre de commandes",
               data: this.ordersByMonthData.map((data) => data.count),
-              borderColor: "rgba(255, 99, 132, 1)",
+              borderColor: "#0B533D",
               backgroundColor: "rgba(255, 99, 132, 0.2)",
-              fill: false,
-            },
-            {
-              label: "Stocks",
-              data: this.stocksByMonthData.map((data) => data.sum),
-              borderColor: "rgba(54, 162, 235, 1)",
-              backgroundColor: "rgba(54, 162, 235, 0.2)",
               fill: false,
             },
           ],
@@ -151,7 +134,7 @@ export default {
           plugins: {
             title: {
               display: true,
-              text: "Nombre de commandes et stocks par mois",
+              text: "Nombre de commandes par mois",
             },
           },
         },
@@ -160,13 +143,18 @@ export default {
 
     async fetchStoneColorsData() {
       try {
-        const response = await fetch("http://localhost:3000/dashboard/stoneColors");
+        const response = await fetch(
+          "http://localhost:3000/dashboard/stoneColors"
+        );
         const data = await response.json();
         this.stoneColorsData = data.stone_colors;
 
         this.renderStoneColorChart();
       } catch (error) {
-        console.error("Erreur lors de la récupération des données de couleurs de pierres :", error);
+        console.error(
+          "Erreur lors de la récupération des données de couleurs de pierres :",
+          error
+        );
       }
     },
 
@@ -250,12 +238,17 @@ export default {
 
     async fetchOrderStatusCount() {
       try {
-        const response = await fetch("http://localhost:3000/dashboard/orderStatusCount");
+        const response = await fetch(
+          "http://localhost:3000/dashboard/orderStatusCount"
+        );
         const data = await response.json();
         this.totalValidatedOrders = data.nombre_validées;
         this.totalPendingOrders = data.nombre_en_attente;
       } catch (error) {
-        console.error("Erreur lors de la récupération du nombre de commandes par statut :", error);
+        console.error(
+          "Erreur lors de la récupération du nombre de commandes par statut :",
+          error
+        );
       }
     },
 
@@ -265,27 +258,40 @@ export default {
         const data = await response.json();
         this.totalOrders = data.total_orders;
       } catch (error) {
-        console.error("Erreur lors de la récupération du nombre total de commandes :", error);
+        console.error(
+          "Erreur lors de la récupération du nombre total de commandes :",
+          error
+        );
       }
     },
 
     async fetchTotalProducts() {
       try {
-        const response = await fetch("http://localhost:3000/dashboard/totalStones");
+        const response = await fetch(
+          "http://localhost:3000/dashboard/totalStones"
+        );
         const data = await response.json();
         this.totalProducts = data.total_stones;
       } catch (error) {
-        console.error("Erreur lors de la récupération du nombre total de produits :", error);
+        console.error(
+          "Erreur lors de la récupération du nombre total de produits :",
+          error
+        );
       }
     },
 
     async fetchTotalUsers() {
       try {
-        const response = await fetch("http://localhost:3000/userprofiles/count");
+        const response = await fetch(
+          "http://localhost:3000/userprofiles/count"
+        );
         const data = await response.json();
         this.totalUsers = data.total_userprofiles;
       } catch (error) {
-        console.error("Erreur lors de la récupération du nombre total d'utilisateurs :", error);
+        console.error(
+          "Erreur lors de la récupération du nombre total d'utilisateurs :",
+          error
+        );
       }
     },
   },

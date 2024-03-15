@@ -378,23 +378,6 @@ app.get('/dashboard/totalStones', async (req, res) => {
   }
 });
 
-// ROUTE pour RECUPERER le nombre de stocks de pierres par mois
-app.get('/dashboard/stocksByMonth', async (req, res) => {
-  try {
-    const stocksByMonth = await Product.findAll({
-      attributes: [
-        [sequelize.fn('MONTH', sequelize.col('createdAt')), 'month'],
-        [sequelize.fn('SUM', sequelize.col('PRODUCT_STOCK')), 'sum']
-      ],
-      group: [sequelize.fn('MONTH', sequelize.col('createdAt'))]
-    });
-
-    res.status(200).json({ stocks_by_month: stocksByMonth });
-  } catch (error) {
-    console.error('Erreur lors de la récupération du nombre de stocks par mois :', error);
-    res.status(500).json({ error: 'Erreur lors de la récupération du nombre de stocks par mois' });
-  }
-});
 
 // TABLE ORDERS
 
