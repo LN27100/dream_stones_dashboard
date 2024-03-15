@@ -47,8 +47,8 @@
         <div class="col-md-3 mr-2">
           <div class="card">
             <div class="card-body">
-              <h6 class="card-title">Total des pierres</h6>
-              <p class="recupText">{{ totalProducts }}</p>
+              <h6 class="card-title">Commandes complétées</h6>
+              <p class="recupText">{{ totalCompletedOrders }}</p>
             </div>
           </div>
         </div>
@@ -85,6 +85,7 @@ export default {
       totalOrders: 0,
       totalValidatedOrders: 0,
       totalPendingOrders: 0,
+      totalCompletedOrders: 0,
       stoneColorsData: [],
       ordersByMonthData: [],
     };
@@ -93,11 +94,22 @@ export default {
     this.fetchTotalProducts();
     this.fetchTotalUsers();
     this.fetchTotalOrders();
+    this.fetchCompletedOrdersCount();
     this.fetchOrderStatusCount();
     this.fetchOrdersByMonth();
     this.fetchStoneColorsData();
   },
   methods: {
+    
+    async fetchCompletedOrdersCount() {
+      try {
+        const response = await fetch('http://localhost:3000/dashboard/completedOrdersCount');
+        const data = await response.json();
+        this.totalCompletedOrders = data.nombre_complétées;
+      } catch (error) {
+        console.error('Erreur lors de la récupération du nombre de commandes complétées :', error);
+      }
+    },
     async fetchOrdersByMonth() {
       try {
         const response = await fetch(

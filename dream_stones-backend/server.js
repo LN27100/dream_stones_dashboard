@@ -449,21 +449,47 @@ app.get('/orders/pending', async (req, res) => {
 // ROUTE pour RECUPERER le NOMBRE de commandes VALIDEES et le NOMBRE de commandes EN ATTENTE (ORDERS)
 app.get('/dashboard/orderStatusCount', async (req, res) => {
   try {
-    const [result] = await sequelize.query(`
-      SELECT 
-        SUM(CASE WHEN ORDER_STATUS = 'validée' THEN 1 ELSE 0 END) AS nombre_validées,
-        SUM(CASE WHEN ORDER_STATUS = 'en attente de validation' THEN 1 ELSE 0 END) AS nombre_en_attente
-      FROM 
-        orders;
+    const [validatedResult] = await sequelize.query(`
+      SELECT COUNT(*) AS nombre_validées
+      FROM orders
+      WHERE ORDER_STATUS = 'validée';
+    `);
+
+    const [pendingResult] = await sequelize.query(`
+      SELECT COUNT(*) AS nombre_en_attente
+      FROM orders
+      WHERE ORDER_STATUS = 'en attente de validation';
     `);
 
     res.status(200).json({ 
-      nombre_validées: result[0].nombre_validées,
-      nombre_en_attente: result[0].nombre_en_attente
+      nombre_validées: validatedResult[0].nombre_validées,
+      nombre_en_attente: pendingResult[0].nombre_en_attente
     });
   } catch (error) {
     console.error('Erreur lors de la récupération du nombre de commandes par statut :', error);
     res.status(500).json({ error: 'Erreur lors de la récupération du nombre de commandes par statut' });
+  }
+});
+
+
+// ROUTE pour RECUPERER le NOMBRE de commandes COMPLETÉES (ORDERS)
+app.get('/dashboard/completedOrdersCount', async (req, res) => {
+  try {
+    const [result] = await sequelize.query(`
+      SELECT 
+        COUNT(*) AS nombre_complétées
+      FROM 
+        orders
+      WHERE 
+        ORDER_STATUS = 'complétée';
+    `);
+
+    res.status(200).json({ 
+      nombre_complétées: result[0].nombre_complétées
+    });
+  } catch (error) {
+    console.error('Erreur lors de la récupération du nombre de commandes complétées :', error);
+    res.status(500).json({ error: 'Erreur lors de la récupération du nombre de commandes complétées' });
   }
 });
 
