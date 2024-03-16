@@ -116,7 +116,7 @@
       </div>
 
       <div class="button-container">
-        <button type="submit">Ajouter</button>
+        <button class="btn2" type="submit">Ajouter</button>
       </div>
     </form>
 
@@ -168,21 +168,7 @@ export default {
 </script>
 
 <style>
-.containerReg {
-  border-radius: 20px;
-  width: 40rem;
-  margin-left: 17rem;
-  padding: 1rem;
-  background: linear-gradient(0deg, rgba(34, 193, 195, 1) 14%, rgba(91, 189, 158, 1) 60%);
-  -webkit-box-shadow: 10px 15px 5px 3px #6eb59d;
-  -moz-box-shadow: 10px 15px 5px 3px #6eb59d;
-  filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=10, OffY=15, Color='#6eb59d', Positive='true');
-  zoom: 1;
-  box-shadow: 10px 15px 5px 3px #6eb59d;
-  -moz-border-radius: 20px;
-  -webkit-border-radius: 20px;
-  border-radius: 20px;
-}
+
 
 .input-container {
   position: relative;

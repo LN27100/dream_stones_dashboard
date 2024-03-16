@@ -127,15 +127,11 @@ export default {
 </script>
 
 <style>
+
 .containerReg {
-  margin: 2rem;
-  border-radius: 20px;
-  width: 60rem;
+  margin: 2rem auto 0; 
+  width: 40rem;
   background: linear-gradient(0deg, rgba(34, 193, 195, 1) 14%, rgba(91, 189, 158, 1) 60%);
-  -webkit-box-shadow: 10px 15px 5px 3px #6eb59d;
-  -moz-box-shadow: 10px 15px 5px 3px #6eb59d;
-  filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=10, OffY=15, Color='#6eb59d', Positive='true');
-  zoom: 1;
   box-shadow: 10px 15px 5px 3px #6eb59d;
   -moz-border-radius: 20px;
   -webkit-border-radius: 20px;

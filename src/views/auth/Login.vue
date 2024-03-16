@@ -1,29 +1,33 @@
 <template>
-    <div class="containerHome">
+  <div class="containerReg">
     <h1>Connexion</h1>
 
     <!-- au moment où je submit, je dis d'aller à la méthode login (écoute du submit)-->
     <form @submit.prevent="login">
       <div class="formGroup">
-        <label for="user_login">Email </label>
-        <input
-          id="user_login"
-          type="text"
-          placeholder="Adresse email"
-          autocomplete="email"
-          v-model="user.email"
-        />
+        <div class="input-container">
+          <label for="user_login">Email </label>
+          <input
+            id="user_login"
+            type="text"
+            placeholder="Adresse email"
+            autocomplete="email"
+            v-model="user.email"
+          />
+        </div>
       </div>
       <!-- v-model indique que lorsque j'écris dans les inputs, cela écrit aussi dans les propriétés user -->
       <div class="formGroup">
-        <label for="user_password">Mot de passe </label>
-        <input
-          id="user_password"
-          type="password"
-          placeholder="Mot de passe"
-          autocomplete="current-password"
-          v-model="user.password"
-        />
+        <div class="input-container">
+          <label for="user_password">Mot de passe </label>
+          <input
+            id="user_password"
+            type="password"
+            placeholder="Mot de passe"
+            autocomplete="current-password"
+            v-model="user.password"
+          />
+        </div>
       </div>
       <div class="formGroup">
         <button type="submit" class="btn2">Se connecter</button>
@@ -66,7 +70,7 @@ export default {
           if (response.data.success) {
             localStorage.setItem("loggedIn", true);
             // Rediriger l'utilisateur vers Dashboard.vue
-            this.$router.push({ name: "dashboard"});
+            this.$router.push({ name: "dashboard" });
             // Réinitialisation de l'erreur en cas de succès de la connexion
             this.errorMessage = "";
           } else {
@@ -88,28 +92,14 @@ export default {
   color: red;
 }
 
-.containerUsage {
-  border-radius: 20px;
-  width: 40rem;
-  margin-left: 17rem;
-  padding: 1rem;
-  background: linear-gradient(0deg, rgba(34, 193, 195, 1) 14%, rgba(91, 189, 158, 1) 60%);
-  /* ombrage card */
-  -webkit-box-shadow: 10px 15px 5px 3px #6eb59d;
-  -moz-box-shadow: 10px 15px 5px 3px #6eb59d;
-  filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=10, OffY=15, Color='#6eb59d', Positive='true');
-  zoom: 1;
-  box-shadow: 10px 15px 5px 3px #6eb59d;
-  -moz-border-radius: 20px;
-  -webkit-border-radius: 20px;
-}
-
 *,
 ::after,
 ::before {
   box-sizing: content-box;
 }
+
 .btn2 {
+  margin-bottom: 1rem;
   margin-top: 1rem;
   background-color: #24916a;
   font-family: "Varela Round", sans-serif;
@@ -126,4 +116,6 @@ export default {
 .btn2:hover {
   background-color: #57bc9a;
 }
+
+
 </style>
