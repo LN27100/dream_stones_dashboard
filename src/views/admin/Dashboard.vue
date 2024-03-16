@@ -61,7 +61,7 @@
           </div>
         </div>
         <div class="col-md-3 mr-4">
-          <div class="card">
+          <div class="card" style="height: 350px">
             <div class="card-body">
               <h6 class="card-title">Stats de ventes mensuelles</h6>
               <canvas id="lineChart"></canvas>
@@ -100,14 +100,18 @@ export default {
     this.fetchStoneColorsData();
   },
   methods: {
-    
     async fetchCompletedOrdersCount() {
       try {
-        const response = await fetch('http://localhost:3000/dashboard/completedOrdersCount');
+        const response = await fetch(
+          "http://localhost:3000/dashboard/completedOrdersCount"
+        );
         const data = await response.json();
         this.totalCompletedOrders = data.nombre_complétées;
       } catch (error) {
-        console.error('Erreur lors de la récupération du nombre de commandes complétées :', error);
+        console.error(
+          "Erreur lors de la récupération du nombre de commandes complétées :",
+          error
+        );
       }
     },
     async fetchOrdersByMonth() {
@@ -116,7 +120,10 @@ export default {
           "http://localhost:3000/dashboard/ordersByMonth"
         );
         const data = await response.json();
-        this.ordersByMonthData = data.orders_by_month;
+        // Trier les données des mois par leur position dans l'année (de 1 à 12)
+        this.ordersByMonthData = data.orders_by_month.sort((a, b) => {
+          return parseInt(a.month) - parseInt(b.month);
+        });
 
         this.renderLineChart();
       } catch (error) {
@@ -128,6 +135,9 @@ export default {
     },
     renderLineChart() {
       const ctx = document.getElementById("lineChart").getContext("2d");
+      const counts = this.ordersByMonthData.map((data) => data.count);
+      const maxYValue = Math.max(...counts);
+
       new Chart(ctx, {
         type: "line",
         data: {
@@ -135,18 +145,42 @@ export default {
           datasets: [
             {
               label: "Nombre de commandes",
-              data: this.ordersByMonthData.map((data) => data.count),
+              data: counts,
               borderColor: "#0B533D",
-              backgroundColor: "rgba(255, 99, 132, 0.2)",
               fill: false,
             },
           ],
         },
         options: {
+          maintainAspectRatio: false, // Permet au graphique de s'étendre pour remplir son conteneur
+          aspectRatio: 1, 
+          scales: {
+            y: {
+              beginAtZero: true, // Commence l'axe y à 0
+              ticks: {
+                precision: 0,
+              },
+            },
+          },
           plugins: {
-            title: {
-              display: true,
-              text: "Nombre de commandes par mois",
+            legend: {
+              position: "bottom",
+              labels: {
+                font: {
+                  family: '"Varela Round", sans-serif',
+                  size: 12,
+                  style: "normal",
+                },
+                color: "#0B533D",
+              },
+            },
+          },
+          layout: {
+            padding: {
+              top: 20,
+              bottom: 20,
+              left: 5,
+              right: 5,
             },
           },
         },
@@ -190,10 +224,15 @@ export default {
           plugins: {
             legend: {
               position: "bottom",
-            },
-            title: {
-              display: true,
-              text: "Nombre de pierres par couleurs",
+              labels: {
+                font: {
+                  family: '"Varela Round", sans-serif',
+                  size: 12,
+                  style: "normal",
+                },
+                color: "#0B533D",
+                padding: 10,
+              },
             },
           },
         },
@@ -284,7 +323,6 @@ export default {
   },
 };
 </script>
-
 
 <style>
 /* Dashboard */

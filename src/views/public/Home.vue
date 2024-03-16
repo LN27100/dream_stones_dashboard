@@ -3,8 +3,8 @@
        <h1>Bienvenue sur la plateforme administrateur.</h1>
        <p class="homeTexte">Veuillez vous connecter pour accéder à votre dashboard</p>
        <p class="homeTexte">Une fois connecté, vous arriverez sur le tableau de bord de l'entreprise de pierres et minéraux "Dream Stones".</p>
-       <p class="homeTexte">Sur ce portail, vous retrouverez tout ce qui concerne les administrateurs, les produits et les commandes.</p>
-       <p class="homeTexte">Cela vous permettra de consulter la liste de tous les administrateurs ainsi que la liste de tous les produits en vente.</p>
+       <p class="homeTexte">Sur ce portail, vous retrouverez ce qui concerne les administrateurs, les produits et les commandes.</p>
+       <p class="homeTexte">Cela vous permettra de consulter la liste des administrateurs ainsi que la liste des produits en vente.</p>
        <p class="homeTexte">D'ajouter un administrateur et un produit.</p>
        <p class="homeTexte">De voir les détails d'un produit, modifier celui-ci ou le supprimer.</p>
        <p class="homeTexte">Sur le dashboard vous pourrez également visionner différentes informations essentielles à la gestion de l'entreprise comme des graphiques de statistiques.</p>

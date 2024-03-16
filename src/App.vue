@@ -65,7 +65,8 @@ h1 {
 }
 
 table {
-  width: 100%;
+  margin: 0 auto;
+  width: 60%;
   border-collapse: collapse;
 }
 
