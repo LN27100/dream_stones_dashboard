@@ -245,7 +245,7 @@ app.post('/products', async (req, res) => {
       PRODUCT_COLOR
     });
 
-    res.status(201).json({ message: 'Produit ajouté avec succès' });
+    res.status(201).json({ message: 'Pierre ajouté avec succès' });
   } catch (error) {
     console.error('Erreur lors de l\'ajout du produit :', error);
     res.status(500).json({ error: 'Erreur lors de l\'ajout du produit' });
@@ -293,21 +293,14 @@ app.get('/products/:id', async (req, res) => {
   console.log('Tentative de récupération des détails du produit avec l\'ID :', productId);
 
   try {
-    // Logique pour récupérer les détails du produit en fonction de l'ID
     const product = await Product.findByPk(productId);
 
-    // Vérifier si le produit a été trouvé
     if (!product) {
-      // Si le produit n'est pas trouvé, retourner une erreur 404 avec un message approprié
       console.log('Produit non trouvé pour l\'ID :', productId);
       return res.status(404).json({ error: 'Produit non trouvé' });
     }
-
-    // Envoyer les détails du produit en réponse
-    console.log('Détails du produit récupérés avec succès pour l\'ID :', productId);
     res.status(200).json({ product });
   } catch (error) {
-    // Gérer les erreurs
     console.error('Erreur lors de la récupération des détails du produit :', error);
     res.status(500).json({ error: 'Erreur lors de la récupération des détails du produit' });
   }
