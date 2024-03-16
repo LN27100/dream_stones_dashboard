@@ -153,6 +153,10 @@ export default {
           this.productData
         );
         this.message = response.data.message;
+        // Afficher le message pendant 3 secondes puis le supprimer
+        setTimeout(() => {
+          this.message = "";
+        }, 3000);
       } catch (error) {
         this.message =
           "Une erreur s'est produite lors de l'ajout du produit.";
@@ -191,5 +195,16 @@ export default {
   right: -15px;
   color: red;
   font-size: 1rem;
+}
+
+  /* Pop-up confirmation ajout pierre */
+
+.message {
+  background-color: #4CAF50;
+  color: white;
+  text-align: center;
+  padding: 16px;
+  border-radius: 5px;
+  margin-top: 10px;
 }
 </style>

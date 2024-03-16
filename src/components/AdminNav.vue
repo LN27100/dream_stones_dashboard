@@ -76,7 +76,7 @@ a:-webkit-any-link {
 }
 
 a.router-link-exact-active {
-  color:bisque;
+  color:#f1c232;
   font-weight: bold;
 }
 
