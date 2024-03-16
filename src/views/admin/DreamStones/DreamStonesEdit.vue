@@ -13,17 +13,30 @@
     </select>
 
     <div v-if="selectedProduct">
-
-      <p class="recupText2"><span>ID:</span> {{ selectedProduct.PRODUCT_ID }}</p>
-      <p class="recupText2"><span>Référence:</span> {{ selectedProduct.PRODUCT_REF }}</p>
-      <p class="recupText2"><span>Nom:</span> {{ selectedProduct.PRODUCT_NAME }}</p>
-      <p class="recupText2"><span>Description:</span> {{ selectedProduct.PRODUCT_DESC }}</p>
+      <p class="recupText2">
+        <span>ID:</span> {{ selectedProduct.PRODUCT_ID }}
+      </p>
+      <p class="recupText2">
+        <span>Référence:</span> {{ selectedProduct.PRODUCT_REF }}
+      </p>
+      <p class="recupText2">
+        <span>Nom:</span> {{ selectedProduct.PRODUCT_NAME }}
+      </p>
+      <p class="recupText2">
+        <span>Description:</span> {{ selectedProduct.PRODUCT_DESC }}
+      </p>
       <p class="recupText2">
         Pays d'origine: {{ selectedProduct.PRODUCT_ORIGIN_COUNTRY }}
       </p>
-      <p class="recupText2"><span>Couleur:</span> {{ selectedProduct.PRODUCT_COLOR }}</p>
-      <p class="recupText2"><span>Stock:</span> {{ selectedProduct.PRODUCT_STOCK }}</p>
-      <p class="recupText2"><span>Prix unitaire:</span> {{ selectedProduct.PRODUCT_UNIT_PRICE }}€</p>
+      <p class="recupText2">
+        <span>Couleur:</span> {{ selectedProduct.PRODUCT_COLOR }}
+      </p>
+      <p class="recupText2">
+        <span>Stock:</span> {{ selectedProduct.PRODUCT_STOCK }}
+      </p>
+      <p class="recupText2">
+        <span>Prix unitaire:</span> {{ selectedProduct.PRODUCT_UNIT_PRICE }}€
+      </p>
 
       <div class="spaceBtn">
         <button class="btn2" @click="showEditForm">Modifier</button>

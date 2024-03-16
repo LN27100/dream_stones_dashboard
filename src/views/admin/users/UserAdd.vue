@@ -130,7 +130,7 @@ export default {
 
 .containerReg {
   margin: 2rem auto 0;
-  padding-top: 1rem; 
+  padding: 1rem; 
   width: 40rem;
   background: linear-gradient(0deg, rgba(34, 193, 195, 1) 14%, rgba(91, 189, 158, 1) 60%);
   box-shadow: 10px 15px 5px 3px #6eb59d;
