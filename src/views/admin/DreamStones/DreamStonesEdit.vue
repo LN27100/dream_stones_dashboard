@@ -1,17 +1,16 @@
 <template>
-  <div>
+  <div class="containerReg">
     <h1>Détails d'une pierre</h1>
     <select v-model="selectedProductId" @change="fetchProductDetails">
-  <option  selected value="">Choisissez un ID</option>
-  <option
-    v-for="productId in productIds"
-    :key="productId"
-    :value="productId"
-  >
-    {{ productId }}
-  </option>
-</select>
-
+      <option selected value="">Choisissez un ID</option>
+      <option
+        v-for="productId in productIds"
+        :key="productId"
+        :value="productId"
+      >
+        {{ productId }}
+      </option>
+    </select>
 
     <div v-if="selectedProduct">
       <h2>Détails de la pierre</h2>
@@ -29,62 +28,70 @@
         Prix unitaire: {{ selectedProduct.PRODUCT_UNIT_PRICE }}€
       </p>
 
-      <!-- Modifier une pierre -->
-      <button class="btn2" @click="showEditForm">Modifier</button>
-      <!-- Supprimer une pierre -->
-      <button class="btn2" @click="confirmDelete">Supprimer</button>
+      <div class="spaceBtn">
+        <button class="btn2" @click="showEditForm">Modifier</button>
+        <button class="btn2" @click="confirmDelete">Supprimer</button>
+      </div>
 
       <!-- Formulaire de modification -->
       <div v-if="showEditFormFlag">
         <h2>Modifier la pierre</h2>
         <form @submit.prevent="updateProduct">
-          <label for="ref">Référence:</label>
-          <input
-            type="text"
-            id="ref"
-            v-model="updatedProduct.PRODUCT_REF"
-          /><br />
-
-          <label for="name">Nom:</label>
-          <input
-            type="text"
-            id="name"
-            v-model="updatedProduct.PRODUCT_NAME"
-          /><br />
-
-          <label for="desc">Description:</label>
-          <textarea id="desc" v-model="updatedProduct.PRODUCT_DESC"></textarea
-          ><br />
-
-          <label for="origin">Pays d'origine:</label>
-          <input
-            type="text"
-            id="origin"
-            v-model="updatedProduct.PRODUCT_ORIGIN_COUNTRY"
-          /><br />
-
-          <label for="color">Couleur:</label>
-          <input
-            type="text"
-            id="color"
-            v-model="updatedProduct.PRODUCT_COLOR"
-          /><br />
-
-          <label for="stock">Stock:</label>
-          <input
-            type="number"
-            id="stock"
-            v-model="updatedProduct.PRODUCT_STOCK"
-          /><br />
-
-          <label for="price">Prix unitaire:</label>
-          <input
-            type="number"
-            id="price"
-            v-model="updatedProduct.PRODUCT_UNIT_PRICE"
-          /><br />
-
-          <button type="submit">Enregistrer</button>
+          <div class="input-container">
+            <label for="ref">Référence:</label>
+            <input type="text" id="ref" v-model="updatedProduct.PRODUCT_REF" />
+          </div>
+          <div class="input-container">
+            <label for="name">Nom:</label>
+            <input
+              type="text"
+              id="name"
+              v-model="updatedProduct.PRODUCT_NAME"
+            />
+          </div>
+          <div class="input-container">
+            <label for="desc">Description:</label>
+            <textarea
+              id="desc"
+              v-model="updatedProduct.PRODUCT_DESC"
+            ></textarea>
+          </div>
+          <div class="input-container">
+            <label for="origin">Pays d'origine:</label>
+            <input
+              type="text"
+              id="origin"
+              v-model="updatedProduct.PRODUCT_ORIGIN_COUNTRY"
+            />
+          </div>
+          <div class="input-container">
+            <label for="color">Couleur:</label>
+            <input
+              type="text"
+              id="color"
+              v-model="updatedProduct.PRODUCT_COLOR"
+            />
+          </div>
+          <div class="input-container">
+            <label for="stock">Stock:</label>
+            <input
+              type="number"
+              id="stock"
+              v-model="updatedProduct.PRODUCT_STOCK"
+            />
+          </div>
+          <div class="input-container">
+            <label for="price">Prix unitaire:</label>
+            <input
+              type="number"
+              id="price"
+              v-model="updatedProduct.PRODUCT_UNIT_PRICE"
+            />
+          </div>
+          <div class="spaceBtn">
+            <button class="btn2" type="submit">Enregistrer</button>
+            <button class="btn2" @click="cancelEdit">Annuler</button>
+          </div>
         </form>
       </div>
     </div>
@@ -178,6 +185,12 @@ export default {
       }
     },
   },
+  cancelEdit() {
+    // Retourner formulaire aux détails actuels du produit
+    this.updatedProduct = { ...this.selectedProduct };
+    // Masquer le formulaire de modification
+    this.showEditFormFlag = false;
+  },
 };
 </script>
 
@@ -185,5 +198,11 @@ export default {
 .recupText2 {
   color: black;
   text-decoration: none;
+}
+
+.spaceBtn {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
 }
 </style>

@@ -12,10 +12,12 @@
           >Liste des admins</router-link
         >
       </li>
+      <li>&nbsp;</li>
       <li>
         <router-link to="/admin/users/add">Ajouter un admin</router-link>
       </li>
   
+      <li>&nbsp;</li>
       <li>&nbsp;</li>
 
       <p>Pierres :</p>
@@ -25,11 +27,13 @@
           >Liste des pierres</router-link
         >
       </li>
+      <li>&nbsp;</li>
       <li>
         <router-link to="/admin/DreamStones/add"
           >Ajouter une pierre</router-link
         >
       </li>
+      <li>&nbsp;</li>
       <li>
         <router-link to="/admin/DreamStones/edit/"
           >Editer une pierre</router-link
@@ -37,6 +41,9 @@
       </li>
 
       <li>&nbsp;</li>
+      <li>&nbsp;</li>
+
+      <p>Stocks :</p>
 
       <li>
         <router-link to="/admin/Stocks/index/"

@@ -59,8 +59,9 @@ h1 {
 /* tableaux */
 
 .table-container {
-  margin: 0 auto; /* Centrer horizontalement */
-  width: 80%; /* Largeur du conteneur */
+  margin: 0 auto; 
+  width: 80%; 
+  margin:2rem
 }
 
 table {
