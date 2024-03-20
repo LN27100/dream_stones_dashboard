@@ -9,9 +9,11 @@
           id="last_name"
           v-model="adminData.last_name"
           required
+          @blur="validateLastName"
         />
         <!-- contrôle de champs obligatoire -->
         <span v-if="!adminData.last_name" class="required-label">*</span>
+        <p class="text-danger" v-if="lastNameError">{{ lastNameError }}</p>
       </div>
       <div class="input-container">
         <label for="first_name">Prénom:</label>
@@ -20,8 +22,10 @@
           id="first_name"
           v-model="adminData.first_name"
           required
+          @blur="validateFirstName"
         />
         <span v-if="!adminData.first_name" class="required-label">*</span>
+        <p class="text-danger" v-if="firstNameError">{{ firstNameError }}</p>
       </div>
       <div class="input-container">
         <label for="email">Email:</label>
@@ -31,8 +35,10 @@
           v-model="adminData.email"
           required
           autocomplete="username"
+          @blur="validateEmail"
         />
         <span v-if="!adminData.email" class="required-label">*</span>
+        <p class="text-danger" v-if="emailError">{{ emailError }}</p>
       </div>
       <div class="input-container">
         <label for="password">Mot de passe:</label>
@@ -42,7 +48,7 @@
           v-model="adminData.password"
           required
           autocomplete="new-password"
-          @click="showPasswordConditions = !showPasswordConditions"
+          @focus="showPasswordConditions = true"
         />
         <span v-if="!adminData.password" class="required-label">*</span>
         <div class="password-conditions" :class="{ 'visible': showPasswordConditions }">
@@ -53,6 +59,17 @@
           <div :class="{ 'condition-failed': !hasSpecialChar, 'condition-passed': hasSpecialChar }">Un caractère spécial</div>
         </div>
       </div>
+      <div class="input-container">
+    <label for="confirm_password">Confirmer le mot de passe:</label>
+    <input
+      type="password"
+      id="confirm_password"
+      v-model="confirmPassword"
+      required
+      autocomplete="new-password"
+    />
+    <span v-if="!confirmPassword" class="required-label">*</span>
+</div>
       <div class="button-container">
         <button type="submit" :disabled="!isValidPassword">Ajouter</button>
       </div>
@@ -73,8 +90,12 @@ export default {
         email: "",
         password: "",
       },
+      confirmPassword: "",
       message: "",
       showPasswordConditions: false,
+      lastNameError: "",
+      firstNameError: "",
+      emailError: "",
     };
   },
   computed: {
@@ -105,22 +126,43 @@ export default {
   },
   methods: {
     async addAdmin() {
-      if (!this.isValidPassword) {
-        this.message = "Le mot de passe ne respecte pas les critères requis.";
-        return; // Ne continuez pas si le mot de passe est invalide
-      }
-      
-      try {
-        const response = await axios.post(
-          "http://localhost:3000/admins",
-          this.adminData
-        );
-        this.message = response.data.message;
-      } catch (error) {
-        this.message =
-          "Une erreur s'est produite lors de l'ajout de l'administrateur.";
-        console.error(error);
-      }
+  if (this.adminData.password !== this.confirmPassword) {
+    this.message = "Les mots de passe ne correspondent pas.";
+    return;
+  }
+
+  if (!this.isValidPassword) {
+    this.message = "Le mot de passe ne respecte pas les critères requis.";
+    return; // Ne continue pas si le mot de passe est invalide
+  }
+  
+  try {
+    const response = await axios.post(
+      "http://localhost:3000/admins",
+      this.adminData
+    );
+    this.message = response.data.message;
+
+    // Redirection vers la page de la liste des administrateurs
+        this.$router.push('/admin/users/index');
+  } catch (error) {
+    this.message =
+      "Une erreur s'est produite lors de l'ajout de l'administrateur.";
+    console.error(error);
+  }
+},
+    validateLastName() {
+      const lastNameValue = this.adminData.last_name.trim();
+      this.lastNameError = !/^[a-zA-Z\u00C0-\u024F-]+$/.test(lastNameValue) ? "Le nom ne peut contenir que des lettres et des tirets" : "";
+    },
+    validateFirstName() {
+      const firstNameValue = this.adminData.first_name.trim();
+      this.firstNameError = !/^[a-zA-Z\u00C0-\u024F-]+$/.test(firstNameValue) ? "Le prénom ne peut contenir que des lettres et des tirets" : "";
+    },
+    validateEmail() {
+      const emailValue = this.adminData.email.trim();
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      this.emailError = !emailRegex.test(emailValue) ? "L'adresse email est invalide" : "";
     },
   },
 };

@@ -4,7 +4,6 @@
     <table>
       <thead>
         <tr>
-          <th>ID</th>
           <th>Nom</th>
           <th>Référence</th>
           <th>Pays d'origine</th>
@@ -15,7 +14,6 @@
       </thead>
       <tbody>
         <tr v-for="product in products" :key="product.PRODUCT_ID">
-          <td>{{ product.PRODUCT_ID }}</td>
           <td>{{ product.PRODUCT_NAME }}</td>
           <td>{{ product.PRODUCT_REF }}</td>
           <td>{{ product.PRODUCT_ORIGIN_COUNTRY }}</td>

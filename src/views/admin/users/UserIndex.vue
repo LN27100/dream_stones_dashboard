@@ -4,7 +4,6 @@
     <table>
       <thead>
         <tr>
-          <th>ID</th>
           <th>Nom</th>
           <th>Prénom</th>
           <th>Email</th>
@@ -12,7 +11,6 @@
       </thead>
       <tbody>
         <tr v-for="admin in admins" :key="admin.id">
-          <td>{{ admin.id }}</td>
           <td>{{ admin.last_name }}</td>
           <td>{{ admin.first_name }}</td>
           <td>{{ admin.email }}</td>

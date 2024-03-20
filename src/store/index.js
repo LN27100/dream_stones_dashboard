@@ -1,14 +1,16 @@
-import { createStore } from 'vuex'
+import { createStore } from 'vuex';
 
 export default createStore({
   state: {
-  },
-  getters: {
+    adminAdded: false,
   },
   mutations: {
+    setAdminAdded(state, value) {
+      state.adminAdded = value;
+    },
   },
   actions: {
   },
   modules: {
   }
-})
+});
