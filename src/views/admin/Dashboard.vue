@@ -74,12 +74,14 @@
 </template>
 
 <script>
+// Importation de la bibliothèque Chart.js pour le rendu des graphiques
 import Chart from "chart.js/auto";
 
 export default {
   name: "DashboardPage",
   data() {
     return {
+      // Données du composant
       totalProducts: 0,
       totalUsers: 0,
       totalOrders: 0,
@@ -91,6 +93,7 @@ export default {
     };
   },
   mounted() {
+    // Initialise les données et effectue les appels API nécessaires
     this.fetchTotalProducts();
     this.fetchTotalUsers();
     this.fetchTotalOrders();
@@ -100,8 +103,10 @@ export default {
     this.fetchStoneColorsData();
   },
   methods: {
+    // Méthodes pour récupérer les données depuis l'API
     async fetchCompletedOrdersCount() {
       try {
+        // Récupère le nombre de commandes complétées depuis l'API
         const response = await fetch(
           "http://localhost:3000/dashboard/completedOrdersCount"
         );
@@ -116,6 +121,7 @@ export default {
     },
     async fetchOrdersByMonth() {
       try {
+        // Récupère les données des commandes par mois depuis l'API
         const response = await fetch(
           "http://localhost:3000/dashboard/ordersByMonth"
         );
@@ -133,11 +139,13 @@ export default {
         );
       }
     },
+    // Méthode pour afficher le graphique des commandes par mois
     renderLineChart() {
       const ctx = document.getElementById("lineChart").getContext("2d");
       const counts = this.ordersByMonthData.map((data) => data.count);
       const maxYValue = Math.max(...counts);
 
+      // Configuration du graphique en ligne
       new Chart(ctx, {
         type: "line",
         data: {
@@ -189,6 +197,7 @@ export default {
 
     async fetchStoneColorsData() {
       try {
+        // Récupère les données sur les couleurs des pierres depuis l'API
         const response = await fetch(
           "http://localhost:3000/dashboard/stoneColors"
         );
@@ -204,8 +213,11 @@ export default {
       }
     },
 
+    // Méthode pour afficher le graphique des couleurs de pierres
     renderStoneColorChart() {
       const ctx = document.getElementById("stoneColorChart").getContext("2d");
+      
+      // Configuration du graphique camembert
       new Chart(ctx, {
         type: "doughnut",
         data: {
@@ -238,8 +250,8 @@ export default {
         },
       });
     },
+      // Méthode pour obtenir le code couleur en fonction de la couleur spécifiée
     getColorCode(color) {
-      // Retourne le code couleur pour chaque couleur spécifiée
       switch (color) {
         case "bleue":
           return "#0863cc";
@@ -263,6 +275,7 @@ export default {
           return "#000000";
       }
     },
+    // Méthode pour récupérer le nombre de commandes par statut depuis l'API
     async fetchOrderStatusCount() {
       try {
         const response = await fetch(
@@ -278,6 +291,7 @@ export default {
         );
       }
     },
+    // Méthode pour récupérer le nombre total de commandes depuis l'API
     async fetchTotalOrders() {
       try {
         const response = await fetch("http://localhost:3000/orders/count");
@@ -290,7 +304,7 @@ export default {
         );
       }
     },
-
+    // Méthode pour récupérer le nombre total de produits depuis l'API
     async fetchTotalProducts() {
       try {
         const response = await fetch(
@@ -305,7 +319,7 @@ export default {
         );
       }
     },
-
+    // Méthode pour récupérer le nombre total d'utilisateurs depuis l'API
     async fetchTotalUsers() {
       try {
         const response = await fetch(
