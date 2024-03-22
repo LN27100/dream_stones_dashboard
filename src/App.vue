@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style>
-/* STYLE GLOBAL DES PAGES */
+/* Style global de la page racine et de ses enfants */
 @import url('https://fonts.googleapis.com/css2?family=Macondo&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 
