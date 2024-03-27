@@ -1,10 +1,13 @@
 <template>
   <div class="admin">
+      <!-- En-tête de l'administration -->
     <AdminHeader />
     <div class="ad_contain">
         <div id="ad_side">
+      <!-- Panneau latéral de navigation -->
             <AdminNav />
         </div>
+      <!-- Vue du routeur pour afficher les différentes pages -->
             <Router-view />
     </div>
 
@@ -17,6 +20,7 @@ import AdminNav from "@/components/AdminNav.vue";
 export default {
   name: "AdminLayout",
   components: {
+    // Composants utilisés dans le layout
     AdminHeader,
     AdminNav,
   },
