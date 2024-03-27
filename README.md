@@ -1,29 +1,58 @@
-# dream_stones_dashboard
+# Dream Stones Dashboard
 
-Voici le dashboard de l'entreprise Dream Stones réalisé avec le framework Vuejs.
+Bienvenue sur le dashboard de l'entreprise Dream Stones, réalisé avec le framework Vue.js.
 
-Afin d'accéder au projet, il vous faudra d'abord importer la base de données disponible dans le dossier 'database' puis configurer le fichier backend 'server.js', disponible dans le dossier 'dream_stones-backend', avec vos propres identifiants de base de données.
+## Contexte du Projet
 
-Ensuite, vous pourrez démarrer le projet via le serveur local en effectuant ces 2 étapes:
-1) Accéder au dossier backend par le chemin de celui-ci dans votre terminal (ex: cd C:\laragon\www\dream_stones_dashboard\dream_stones-backend\) pui démarrer le serveur qui se connecte à la base de données par la commande 'node server.js' dans votre terminal de commandes
-2) démarrer le server local pour que le projet soit accessible depuis votre navigateur à l'adresse 'http://localhost:8080/', en exécutant la commande 'npm run serve' dans votre terminal de commandes.
+Ce projet vise à fournir un tableau de bord interactif pour l'entreprise Dream Stones, permettant aux utilisateurs de visualiser et d'analyser des données pertinentes pour leur activité.
 
-Vous pourrez alors ouvrir et visionner le projet dans votre navigateur ! 
+![Capture d'écran du tableau de bord](src/assets/screenshot.png)
 
-## Project setup
-```
+## Configuration du Projet
+
+Avant de démarrer le projet, veuillez suivre ces étapes :
+
+1. **Importation de la base de données** :
+   Assurez-vous d'importer la base de données disponible dans le dossier 'database' et de configurer le fichier backend 'server.js' avec vos identifiants de base de données.
+
+2. **Démarrage du Serveur Backend** :
+   Accédez au dossier backend dans votre terminal :
+cd dream_stones-backend/
+
+    Démarrer le serveur backend en exécutant la commande :
+node server.js
+
+
+3. **Démarrage du Serveur Local** :
+Accédez au dossier principal du projet et démarrez le serveur local en exécutant la commande :
+npm run serve
+
+
+
+## Lien vers le Dépôt Docker Hub
+
+L'image Docker de ce projet est disponible sur Docker Hub à l'adresse suivante :
+[ln27100/dream_stones_image](https://hub.docker.com/repository/docker/ln27100/dream_stones_image)
+
+Pour tirer cette image Docker localement, exécutez la commande suivante dans votre terminal :
+docker pull ln27100/dream_stones_image
+
+Une fois que vous avez tiré l'image Docker, vous pouvez exécuter un conteneur en utilisant la commande suivante :
+docker run -p 8080:8080 ln27100/dream_stones_image
+
+
+## Configuration du Projet
+Pour installer les dépendances du projet, exécutez la commande suivante :
 yarn install
-```
 
-### Compiles and hot-reloads for development
-```
+
+### Compilation et rechargement à chaud pour le développement
 yarn serve
-```
 
-### Compiles and minifies for production
-```
+### Compilation et minification pour la production
 yarn build
-```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
+Pour plus de détails sur la configuration du projet, consultez la [Référence de Configuration](https://cli.vuejs.org/config/).
+
+
