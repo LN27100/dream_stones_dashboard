@@ -179,6 +179,7 @@ export default {
   -moz-border-radius: 20px;
   -webkit-border-radius: 20px;
   border-radius: 20px;
+  margin-bottom: 4rem;
 }
 
 .input-container {

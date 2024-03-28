@@ -51,4 +51,7 @@ export default {
 
 <style scoped>
 
+#app > div > div.ad_contain > div.table-container {
+  margin-bottom: 22.9rem;
+}
 </style>

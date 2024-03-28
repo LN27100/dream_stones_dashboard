@@ -61,7 +61,8 @@ h1 {
 .table-container {
   margin: 0 auto; 
   width: 80%; 
-  margin:2rem
+  margin-top: 2rem;
+  margin-bottom: 3rem;
 }
 
 table {

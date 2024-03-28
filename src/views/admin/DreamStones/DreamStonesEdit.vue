@@ -219,4 +219,6 @@ export default {
 span {
   font-weight: bold;
 }
+
+
 </style>
