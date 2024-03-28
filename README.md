@@ -15,6 +15,15 @@ Avant de démarrer le projet, veuillez suivre ces étapes :
 1. **Importation de la base de données** :
    Assurez-vous d'importer la base de données disponible dans le dossier 'database' dans votre système de gestion de bases de données et de configurer le fichier backend 'server.js' avec vos identifiants de base de données.
 
+   -- Créer la base de données
+CREATE DATABASE IF NOT EXISTS dream_stones_project;
+
+-- Utiliser la base de données
+USE dream_stones_project;
+
+-- Importer la structure de la base de données à partir du fichier SQL
+SOURCE database/bdd.sql;
+
 2. **Démarrage du Serveur Backend** :
    Accédez au dossier backend dans votre terminal :
 cd dream_stones-backend/

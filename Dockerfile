@@ -15,3 +15,4 @@ EXPOSE 8080
 
 # Commande pour démarrer votre application
 CMD ["npm", "run", "serve"]
+
