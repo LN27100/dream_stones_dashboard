@@ -8,6 +8,7 @@
 
 <script>
 export default {
+      // Données du composant
   data() {
     return {
       creatorName: "Poirier-Halley Hélène",

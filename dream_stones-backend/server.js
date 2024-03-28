@@ -1,25 +1,41 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const { Sequelize, Model, DataTypes } = require('sequelize');
-const cors = require('cors');
-const bcrypt = require('bcrypt');
+//  configure et exécute le serveur backend de l'application, qui gère les requêtes et les réponses entre le frontend et la base de données
 
+import express from 'express';
+// Module pour analyser le corps des requêtes HTTP
+import { json, urlencoded } from 'body-parser';
+// Bibliothèque pour interagir avec les bases de données relationnelles
+import { Sequelize, Model, DataTypes } from 'sequelize';
+// Module pour gérer les requêtes CORS
+import cors from 'cors';
+// Bibliothèque pour hacher les mots de passe
+import { hash, compare } from 'bcrypt';
+
+
+// Crée une instance de l'application Express
 const app = express();
+
+// Définit le numéro de port sur 3000
 const port = 3000;
 
+// Options CORS spécifiant les paramètres d'origine, de méthodes et d'en-têtes autorisés
 const corsOptions = {
-  origin: 'http://localhost:8080',
-  methods: 'GET, POST, PUT, DELETE',
-  allowedHeaders: 'Content-Type,Authorization',
+  origin: 'http://localhost:8080', // Autorise uniquement les requêtes depuis ce domaine
+  methods: 'GET, POST, PUT, DELETE', // Autorise ces méthodes HTTP
+  allowedHeaders: 'Content-Type,Authorization', // Autorise ces en-têtes HTTP
 };
+
 app.use(cors(corsOptions));
 
+// Initialise une connexion à la base de données MySQL avec Sequelize
 const sequelize = new Sequelize('dream_stones_project', 'LN27100', '02111979Lh#', {
-  host: 'localhost',
-  dialect: 'mysql'
+  host: 'localhost', 
+  dialect: 'mysql' 
 });
 
-// TABLE ADMIN
+
+// Définition des modèles qui itéragissent avec les tables de la bdd
+
+// MODELE ADMIN
 
 class Admin extends Model {}
 Admin.init({
@@ -51,8 +67,8 @@ Admin.init({
   timestamps: false
 });
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(json());
+app.use(urlencoded({ extended: true }));
 
 sequelize.authenticate()
   .then(() => {
@@ -77,7 +93,7 @@ app.post('/admins', async (req, res) => {
 
   try {
     // Hasher le mot de passe
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await hash(password, 10);
 
     // CREER un nouvel ADMINISTRATEUR
     await Admin.create({
@@ -139,7 +155,7 @@ app.post('/login', async (req, res) => {
       return res.json({ success: false, message: 'Identifiants incorrects. Veuillez réessayer.' });
     }
 
-    const passwordMatch = await bcrypt.compare(password, admin.password);
+    const passwordMatch = await compare(password, admin.password);
 
     if (passwordMatch) {
       return res.json({ success: true, message: 'Connexion réussie.' });
@@ -171,7 +187,8 @@ app.get('/admins/:id', async (req, res) => {
 });
 
 
-// PRODUITS
+
+// MODELE PRODUITS
 class Product extends Model {}
 
 Product.init({
@@ -372,7 +389,7 @@ app.get('/dashboard/totalStones', async (req, res) => {
 });
 
 
-// TABLE ORDERS
+// MODELE COMMANDES 
 
 // Définir la classe Order
 class Order extends Model {}
@@ -506,7 +523,7 @@ app.get('/dashboard/ordersByMonth', async (req, res) => {
 
 
 
-// USERPROFIL
+// MODELE UTILISATEUR
 
 // Définir la classe Userprofile
 class UserProfile extends Model {}

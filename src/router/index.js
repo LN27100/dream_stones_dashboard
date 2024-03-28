@@ -1,4 +1,6 @@
+// Importation des fonctions de routage de Vue Router
 import { createRouter, createWebHistory } from "vue-router";
+
 import Home from "@/views/public/Home.vue";
 import AdminLayout from "@/views/admin/Layout.vue";
 import Dashboard from "@/views/admin/Dashboard.vue";
@@ -16,7 +18,7 @@ import Login from "@/views/auth/Login.vue";
 
 import NotFound from "@/views/admin/NotFound.vue";
 
-
+// Définition des routes de l'application
 const routes = [
   {
     path: "/",
@@ -61,9 +63,10 @@ const routes = [
   },
 ];
 
+// Création du routeur
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes,
+  history: createWebHistory(process.env.BASE_URL), // Utilisation de l'historique Web
+  routes, // Définition des routes
 });
 
 

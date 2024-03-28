@@ -4,7 +4,7 @@ Bienvenue sur le dashboard de l'entreprise Dream Stones, réalisé avec le frame
 
 ## Contexte du Projet
 
-Ce projet vise à fournir un tableau de bord interactif pour l'entreprise Dream Stones, permettant aux utilisateurs de visualiser et d'analyser des données pertinentes pour leur activité.
+Ce projet vise à fournir un tableau de bord interactif pour l'entreprise Dream Stones, permettant de visualiser et d'analyser des données pertinentes pour son activité.
 
 ![Capture d'écran du tableau de bord](src/assets/screenshot.png)
 
@@ -13,7 +13,7 @@ Ce projet vise à fournir un tableau de bord interactif pour l'entreprise Dream 
 Avant de démarrer le projet, veuillez suivre ces étapes :
 
 1. **Importation de la base de données** :
-   Assurez-vous d'importer la base de données disponible dans le dossier 'database' et de configurer le fichier backend 'server.js' avec vos identifiants de base de données.
+   Assurez-vous d'importer la base de données disponible dans le dossier 'database' dans votre système de gestion de bases de données et de configurer le fichier backend 'server.js' avec vos identifiants de base de données.
 
 2. **Démarrage du Serveur Backend** :
    Accédez au dossier backend dans votre terminal :

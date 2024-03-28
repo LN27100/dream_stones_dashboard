@@ -1,12 +1,14 @@
 <template>
   <div>
     <ul>
+            <!-- Liens de navigation -->
       <li><router-link to='/'>Accueil</router-link></li>
       <li>&nbsp;</li>
       <li><router-link to="/admin/dashboard">Dashboard</router-link></li>
       <li>&nbsp;</li>
 
-      <p>Utilisateur :</p>
+            <!-- Section Utilisateur -->
+      <p>Administrateur :</p>
       <li>
         <router-link to="/admin/users/index"
           >Liste des admins</router-link
@@ -20,6 +22,7 @@
       <li>&nbsp;</li>
       <li>&nbsp;</li>
 
+            <!-- Section Pierres -->
       <p>Pierres :</p>
 
       <li>
@@ -43,6 +46,7 @@
       <li>&nbsp;</li>
       <li>&nbsp;</li>
 
+            <!-- Section Stocks -->
       <p>Stocks :</p>
 
       <li>

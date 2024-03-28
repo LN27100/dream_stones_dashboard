@@ -1,6 +1,7 @@
 <template>
   <img alt="Vue logo" src="../assets/logoOk.png" />
   <nav class="main-nav">
+        <!-- Liens de navigation vers les différentes pages -->
     <router-link to="/">Accueil</router-link>
     <span class="divider">|</span>
     <router-link to="/admin/dashboard">Admin</router-link>

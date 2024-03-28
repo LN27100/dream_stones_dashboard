@@ -12,7 +12,7 @@
           required
         />
 
-        <!-- contrôle de champs obligatoires -->
+        <!-- contrôle de champs obligatoires affiché uniquement si le champs n'est pas rempli-->
         <span v-if="!productData.PRODUCT_REF" class="required-label">*</span>
       </div>
 
@@ -28,6 +28,7 @@
 
       <div class="input-container">
         <label for="productStock">Stock:</label>
+        <!-- v-model : Lorsque la valeur du champ de saisie est modifiée, la propriété de l'objet est mise à jour automatiquement. -->
         <input
           type="number"
           id="productStock"

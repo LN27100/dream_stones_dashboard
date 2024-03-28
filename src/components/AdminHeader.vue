@@ -1,19 +1,22 @@
 <template>
   <div class="ad_head">
+    <!-- Espace réservé pour le logo ou d'autres éléments -->
     <div class="spacer"></div>
+
     <button class="btn3" @click="logout">Déconnexion</button>
   </div>
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
   name: "AdminHeader",
 
   methods: {
+    // Fonction de déconnexion
     logout() {
+      // Supprime l'indicateur de connexion stocké localement
       localStorage.removeItem("loggedIn");
+      // Redirige l'utilisateur vers la page de connexion
       this.$router.push({ name: "Login" });
     },
   },
