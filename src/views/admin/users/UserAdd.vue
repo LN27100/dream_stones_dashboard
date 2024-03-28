@@ -219,4 +219,10 @@ p.message {
   color: #0B533D;
   text-decoration: none;
 }
+
+p.text-danger {
+  color: red; 
+  text-decoration: none; 
+}
+
 </style>

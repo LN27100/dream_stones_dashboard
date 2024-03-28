@@ -2,15 +2,20 @@
     <PublicNav />
   <!-- ici j'affiche le template du Layout qui servira à tous les enfants aussi -->
   <router-view/>
+
+  <AdminFooter />
+
 </template>
 
 <script>
 import PublicNav from "@/components/PublicNav.vue";
+import AdminFooter from "@/components/AdminFooter.vue";
 
 export default {
   name: "App",
   components: {
     PublicNav,
+    AdminFooter,
   },
 };
 </script>
@@ -140,5 +145,12 @@ button[type="submit"]:hover {
   margin-top: 1rem; 
 }
 
+
+#app > footer > div > p {
+  color: black;
+  text-decoration: none;
+  text-align: center;
+  margin-top: 0.3rem;
+}
 
 </style>

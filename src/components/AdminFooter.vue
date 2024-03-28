@@ -38,6 +38,6 @@ export default {
   color: black;
   text-decoration: none;
   text-align: center;
-  margin-top: 0.3rem
+  margin-top: 0.3rem;
 }
 </style>

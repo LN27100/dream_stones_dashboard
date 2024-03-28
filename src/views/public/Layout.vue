@@ -10,15 +10,18 @@
         </div>
     </div>
   </div>
+  <AdminFooter />
 </template>
 
 <script>
 import PublicNav from "@/components/PublicNav.vue";
+import AdminFooter from "@/components/AdminFooter.vue";
 
 export default {
   name: "PublicLayout",
   components: {
     PublicNav,
+    AdminFooter,
   },
 };
 </script>

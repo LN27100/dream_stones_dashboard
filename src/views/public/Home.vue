@@ -8,8 +8,6 @@
        <p class="homeTexte">D'ajouter un administrateur et un produit.</p>
        <p class="homeTexte">De voir les détails d'un produit, modifier celui-ci ou le supprimer.</p>
        <p class="homeTexte">Sur le dashboard vous pourrez également visionner différentes informations essentielles à la gestion de l'entreprise comme des graphiques de statistiques.</p>
-
-
     </div>
 </template>
 
@@ -41,6 +39,7 @@ export default {
   width: 50rem;
   margin: 0 auto;
   margin-top: 2rem;
+  margin-bottom: 1.7rem;
 }
 
 .homeTexte {
