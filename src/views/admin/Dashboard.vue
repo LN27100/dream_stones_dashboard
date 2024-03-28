@@ -341,6 +341,10 @@ export default {
 <style>
 /* Dashboard */
 
+#app > div > div.ad_contain > div:nth-child(2) > main > div {
+margin-bottom: 2rem
+}
+
 h6 {
   text-align: center;
   color: black;

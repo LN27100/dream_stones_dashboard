@@ -69,6 +69,7 @@ ul {
   list-style: none;
   padding: 1rem;
   margin-right: 10px;
+  width: max-content;
 }
 ul li {
   text-align: left;

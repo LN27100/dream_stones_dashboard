@@ -205,6 +205,7 @@ export default {
 </script>
 
 <style>
+
 .recupText2 {
   color: black;
   text-decoration: none;
@@ -219,6 +220,4 @@ export default {
 span {
   font-weight: bold;
 }
-
-
 </style>

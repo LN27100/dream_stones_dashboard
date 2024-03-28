@@ -51,9 +51,10 @@ export default {
 
 #app {
   font-family: "Varela Round", sans-serif;
- 
   text-align: center;
+  min-height: 100vh;
 }
+
 
 h1 {
   font-family: "Macondo", cursive;

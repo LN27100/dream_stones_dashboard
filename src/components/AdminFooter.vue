@@ -22,16 +22,16 @@ export default {
 .footer {
   background-color: rgba(36, 145, 106, 0.6);
   height: 2rem;
-  display: flex;
-  align-items: center;
   width: 100%;
-  margin: 0 auto;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 .container {
   width: 100%;
-  position: relative;
-  height: 100%;
+  text-align: center;
 }
 
 #app > div > footer > div > p {
