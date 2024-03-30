@@ -2,7 +2,7 @@
 
 import express from 'express';
 // Module pour analyser le corps des requêtes HTTP
-import { json, urlencoded } from 'body-parser';
+import bodyParser from 'body-parser';
 // Bibliothèque pour interagir avec les bases de données relationnelles
 import { Sequelize, Model, DataTypes } from 'sequelize';
 // Module pour gérer les requêtes CORS
@@ -11,6 +11,7 @@ import cors from 'cors';
 import { hash, compare } from 'bcrypt';
 
 
+const { json, urlencoded } = bodyParser;
 // Crée une instance de l'application Express
 const app = express();
 
