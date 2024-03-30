@@ -71,22 +71,23 @@ Admin.init({
 app.use(json());
 app.use(urlencoded({ extended: true }));
 
-sequelize.authenticate()
-  .then(() => {
+(async () => {
+  try {
+    await sequelize.authenticate();
     console.log('Connexion à la base de données MySQL établie');
-  })
-  .catch(err => {
+  } catch (err) {
     console.error('Erreur de connexion à la base de données :', err);
-  });
+  }
+})();
 
-  app.post('/logout', async (req, res) => {
-    try {      
-      res.status(200).json({ message: 'Déconnexion réussie' });
-    } catch (error) {
-      console.error('Erreur lors de la déconnexion :', error);
-      res.status(500).json({ error: 'Erreur lors de la déconnexion' });
-    }
-  });
+app.post('/logout', async (req, res) => {
+  try {      
+    res.status(200).json({ message: 'Déconnexion réussie' });
+  } catch (error) {
+    console.error('Erreur lors de la déconnexion :', error);
+    res.status(500).json({ error: 'Erreur lors de la déconnexion' });
+  }
+});
 
 
 app.post('/admins', async (req, res) => {
@@ -111,8 +112,7 @@ app.post('/admins', async (req, res) => {
   }
 });
 
-
-// ROUTE pour RECUPERER un ADMINISTRATEUR par son identifiant
+/// ROUTE pour RECUPERER un ADMINISTRATEUR par son identifiant
 app.get('/admins/:id', async (req, res) => {
   const adminId = req.params.id;
 
@@ -186,6 +186,7 @@ app.get('/admins/:id', async (req, res) => {
     return res.status(500).json({ success: false, message: 'Une erreur s\'est produite lors de la récupération des données de l\'administrateur.' });
   }
 });
+
 
 
 
