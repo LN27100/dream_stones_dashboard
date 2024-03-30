@@ -6,6 +6,7 @@
 
 <script>
 export default {
+    emits: ['vnode-unmounted'],
     name: 'NotFound',
 }
 </script>

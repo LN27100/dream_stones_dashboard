@@ -18,6 +18,7 @@ import PublicNav from "@/components/PublicNav.vue";
 import AdminFooter from "@/components/AdminFooter.vue";
 
 export default {
+  emits: ['vnode-unmounted'],
   name: "PublicLayout",
   components: {
     PublicNav,

@@ -18,6 +18,7 @@ import AdminHeader from "@/components/AdminHeader.vue";
 import AdminNav from "@/components/AdminNav.vue";
 
 export default {
+  emits: ['vnode-unmounted'],
   name: "AdminLayout",
   components: {
     // Composants utilisés dans le layout

@@ -78,6 +78,7 @@
 import Chart from "chart.js/auto";
 
 export default {
+  emits: ['vnode-unmounted'],
   name: "DashboardPage",
   data() {
     return {
@@ -93,7 +94,7 @@ export default {
     };
   },
   mounted() {
-    // Initialise les données et effectue les appels API nécessaires
+    // Initialise les données et effectue les appels Backend nécessaires
     this.fetchTotalProducts();
     this.fetchTotalUsers();
     this.fetchTotalOrders();
@@ -103,10 +104,10 @@ export default {
     this.fetchStoneColorsData();
   },
   methods: {
-    // Méthodes pour récupérer les données depuis l'API
+    // Méthodes pour récupérer les données depuis le Backend
     async fetchCompletedOrdersCount() {
       try {
-        // Récupère le nombre de commandes complétées depuis l'API
+        // Récupère le nombre de commandes complétées depuis le backend
         const response = await fetch(
           "http://localhost:3000/dashboard/completedOrdersCount"
         );
@@ -121,7 +122,7 @@ export default {
     },
     async fetchOrdersByMonth() {
       try {
-        // Récupère les données des commandes par mois depuis l'API
+        // Récupère les données des commandes par mois depuis le Backend
         const response = await fetch(
           "http://localhost:3000/dashboard/ordersByMonth"
         );
@@ -130,7 +131,7 @@ export default {
         this.ordersByMonthData = data.orders_by_month.sort((a, b) => {
           return parseInt(a.month) - parseInt(b.month);
         });
-
+// utilisation de l'api Chart.js
         this.renderLineChart();
       } catch (error) {
         console.error(
@@ -197,7 +198,7 @@ export default {
 
     async fetchStoneColorsData() {
       try {
-        // Récupère les données sur les couleurs des pierres depuis l'API
+        // Récupère les données sur les couleurs des pierres depuis le Backend
         const response = await fetch(
           "http://localhost:3000/dashboard/stoneColors"
         );
@@ -212,7 +213,7 @@ export default {
         );
       }
     },
-
+// Utilisation de l'API chart.js
     // Méthode pour afficher le graphique des couleurs de pierres
     renderStoneColorChart() {
       const ctx = document.getElementById("stoneColorChart").getContext("2d");
@@ -275,7 +276,7 @@ export default {
           return "#000000";
       }
     },
-    // Méthode pour récupérer le nombre de commandes par statut depuis l'API
+    // Méthode pour récupérer le nombre de commandes par statut depuis le Backend
     async fetchOrderStatusCount() {
       try {
         const response = await fetch(
@@ -291,7 +292,7 @@ export default {
         );
       }
     },
-    // Méthode pour récupérer le nombre total de commandes depuis l'API
+    // Méthode pour récupérer le nombre total de commandes depuis le Backend
     async fetchTotalOrders() {
       try {
         const response = await fetch("http://localhost:3000/orders/count");
@@ -304,7 +305,7 @@ export default {
         );
       }
     },
-    // Méthode pour récupérer le nombre total de produits depuis l'API
+    // Méthode pour récupérer le nombre total de produits depuis le Backend
     async fetchTotalProducts() {
       try {
         const response = await fetch(
@@ -319,7 +320,7 @@ export default {
         );
       }
     },
-    // Méthode pour récupérer le nombre total d'utilisateurs depuis l'API
+    // Méthode pour récupérer le nombre total d'utilisateurs depuis le Backend
     async fetchTotalUsers() {
       try {
         const response = await fetch(

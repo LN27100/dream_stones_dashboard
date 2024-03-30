@@ -129,6 +129,7 @@
 import axios from "axios";
 
 export default {
+  emits: ['vnode-unmounted'],
   data() {
     return {
       productData: {

@@ -1,7 +1,12 @@
 <template>
   <div class="containerReg">
     <h1>Détails d'une pierre</h1>
-    <select v-model="selectedProductId" @change="fetchProductDetails">
+    <select
+      id="selectedProductId"
+      name="selectedProductId"
+      v-model="selectedProductId"
+      @change="fetchProductDetails"
+    >
       <option selected value="">Choisissez un ID</option>
       <option
         v-for="productId in productIds"
@@ -49,13 +54,19 @@
         <form @submit.prevent="updateProduct">
           <div class="input-container">
             <label for="ref">Référence:</label>
-            <input type="text" id="ref" v-model="updatedProduct.PRODUCT_REF" />
+            <input
+              type="text"
+              name="ref"
+              id="ref"
+              v-model="updatedProduct.PRODUCT_REF"
+            />
           </div>
           <div class="input-container">
             <label for="name">Nom:</label>
             <input
               type="text"
               id="name"
+              name="name"
               v-model="updatedProduct.PRODUCT_NAME"
             />
           </div>
@@ -63,6 +74,7 @@
             <label for="desc">Description:</label>
             <textarea
               id="desc"
+              name="desc"
               v-model="updatedProduct.PRODUCT_DESC"
             ></textarea>
           </div>
@@ -71,6 +83,7 @@
             <input
               type="text"
               id="origin"
+              name="origin"
               v-model="updatedProduct.PRODUCT_ORIGIN_COUNTRY"
             />
           </div>
@@ -79,6 +92,7 @@
             <input
               type="text"
               id="color"
+              name="color"
               v-model="updatedProduct.PRODUCT_COLOR"
             />
           </div>
@@ -87,6 +101,7 @@
             <input
               type="number"
               id="stock"
+              name="stock"
               v-model="updatedProduct.PRODUCT_STOCK"
             />
           </div>
@@ -95,6 +110,7 @@
             <input
               type="number"
               id="price"
+              name="price"
               v-model="updatedProduct.PRODUCT_UNIT_PRICE"
             />
           </div>
@@ -112,6 +128,7 @@
 import axios from "axios";
 
 export default {
+  emits: ['vnode-unmounted'], // Déclaration des événements émis
   data() {
     return {
       productIds: [],
@@ -194,18 +211,18 @@ export default {
         alert("Erreur lors de la suppression du produit. Veuillez réessayer.");
       }
     },
-  },
-  cancelEdit() {
-    // Retourner formulaire aux détails actuels du produit
-    this.updatedProduct = { ...this.selectedProduct };
-    // Masquer le formulaire de modification
-    this.showEditFormFlag = false;
+
+    cancelEdit() {
+      // Retourner formulaire aux détails actuels du produit
+      this.updatedProduct = { ...this.selectedProduct };
+      // Masquer le formulaire de modification
+      this.showEditFormFlag = false;
+    },
   },
 };
 </script>
 
 <style>
-
 .recupText2 {
   color: black;
   text-decoration: none;

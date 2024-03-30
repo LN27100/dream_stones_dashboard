@@ -30,6 +30,7 @@
 import axios from "axios";
 
 export default {
+  emits: ['vnode-unmounted'],
   name: "DreamStonesIndex",
   data() {
     return {

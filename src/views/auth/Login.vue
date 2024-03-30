@@ -42,6 +42,7 @@
 import axios from "axios";
 
 export default {
+  emits: ['vnode-unmounted'],
   name: "Login",
   data() {
     return {
