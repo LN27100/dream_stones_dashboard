@@ -3,55 +3,16 @@
     <!-- Dashboard -->
     <main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4">
       <h1 class="mt-3 dashboard-title">Dashboard Dream Stones</h1>
+
       <div class="row mt-">
-        <div class="col-md-3 mr-2">
-          <div class="card">
-            <div class="card-body">
-              <h6 class="card-title">Total des pierres</h6>
-              <p class="recupText">{{ totalProducts }}</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 mr-2">
-          <div class="card">
-            <div class="card-body">
-              <h6 class="card-title">Total des utilisateurs</h6>
-              <p class="recupText">{{ totalUsers }}</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 mr-2">
-          <div class="card">
-            <div class="card-body">
-              <h6 class="card-title">Total des commandes</h6>
-              <p class="recupText">{{ totalOrders }}</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 mr-2">
-          <div class="card">
-            <div class="card-body">
-              <h6 class="card-title">Commandes validées</h6>
-              <p class="recupText">{{ totalValidatedOrders }}</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 mr-2">
-          <div class="card">
-            <div class="card-body">
-              <h6 class="card-title">Commandes en attentes</h6>
-              <p class="recupText">{{ totalPendingOrders }}</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 mr-2">
-          <div class="card">
-            <div class="card-body">
-              <h6 class="card-title">Commandes complétées</h6>
-              <p class="recupText">{{ totalCompletedOrders }}</p>
-            </div>
-          </div>
-        </div>
+        <!-- Utilisation d'un composant -->
+      <dashboard-card title="Total des pierres" :value="totalProducts" />
+      <dashboard-card title="Total des utilisateurs" :value="totalUsers" />
+      <dashboard-card title="Total des commandes" :value="totalOrders" />
+      <dashboard-card title="Commandes validées" :value="totalValidatedOrders" />
+      <dashboard-card title="Commandes en attentes" :value="totalPendingOrders" />
+      <dashboard-card title="Commandes complétées" :value="totalCompletedOrders" />
+
         <div class="col-md-3 mr-2">
           <div class="card">
             <div class="card-body">
@@ -76,8 +37,12 @@
 <script>
 // Importation de la bibliothèque Chart.js pour le rendu des graphiques
 import Chart from "chart.js/auto";
+import DashboardCard from '../../components/DashboardCard.vue';
 
 export default {
+  components: {
+    DashboardCard
+  },
   emits: ['vnode-unmounted'],
   name: "DashboardPage",
   data() {
