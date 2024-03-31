@@ -18,7 +18,7 @@ import Login from "@/views/auth/Login.vue";
 
 import NotFound from "@/views/admin/NotFound.vue";
 
-// Définition des routes de l'application
+// DEFINITION DES ROUTES DE L'APPLICATION
 const routes = [
   {
     path: "/",

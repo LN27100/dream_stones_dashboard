@@ -103,6 +103,20 @@ export default {
     this.fetchOrdersByMonth();
     this.fetchStoneColorsData();
   },
+  watch: {
+    // Surveille les changements dans la variable totalOrders
+    totalOrders(newValue) {
+      // Réagit aux changements dans totalOrders
+      console.log("Nouveau total des commandes :", newValue);
+      // Exécutez d'autres actions ici si nécessaire
+    },
+    // Surveille les changements dans la variable totalUsers
+    totalUsers(newValue) {
+      // Réagit aux changements dans totalUsers
+      console.log("Nouveau total des utilisateurs :", newValue);
+      // Exécutez d'autres actions ici si nécessaire
+    },
+  },
   methods: {
     // Méthodes pour récupérer les données depuis le Backend
     async fetchCompletedOrdersCount() {

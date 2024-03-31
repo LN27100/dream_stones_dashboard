@@ -1,4 +1,4 @@
-// Importation de la fonction createStore de Vuex pour créer le store
+// Importation de la fonction createStore de Vuex pour créer le store (configuration de base)
 import { createStore } from 'vuex';
 
 export default createStore({

@@ -116,7 +116,7 @@
           </div>
           <div class="spaceBtn">
             <button class="btn2" type="submit">Enregistrer</button>
-            <button class="btn2" @click="cancelEdit">Annuler</button>
+            <button type="button" class="btn2" @click="cancelEdit">Annuler</button>
           </div>
         </form>
       </div>
