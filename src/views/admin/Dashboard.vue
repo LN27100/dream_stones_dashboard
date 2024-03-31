@@ -34,6 +34,7 @@
   </div>
 </template>
 
+
 <script>
 // Importation de la bibliothèque Chart.js pour le rendu des graphiques
 import Chart from "chart.js/auto";
@@ -251,6 +252,12 @@ export default {
           return "#663300";
         case "rose":
           return "#ff99cc";
+        case "noire":
+          return "#000000";
+        case "orange":
+          return "#FF6600";
+        case "grise":
+          return "#9E9E9E";
         default:
           return "#000000";
       }
@@ -317,6 +324,7 @@ export default {
   },
 };
 </script>
+
 
 <style>
 /* Dashboard */
