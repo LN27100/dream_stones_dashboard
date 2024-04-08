@@ -10,6 +10,7 @@
           <th>Couleur</th>
           <th>Stock</th>
           <th>Prix unitaire</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -20,6 +21,11 @@
           <td>{{ product.PRODUCT_COLOR }}</td>
           <td>{{ product.PRODUCT_STOCK }}</td>
           <td>{{ product.PRODUCT_UNIT_PRICE }} €</td>
+          <td class="text-center">
+              <button @click="confirmDelete(product.PRODUCT_ID)" class="btnDelete">
+              <i class="bi bi-trash"></i>
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -49,10 +55,35 @@ export default {
         console.error("Erreur lors de la récupération des produits :", error);
       }
     },
+    async confirmDelete(productId) {
+      if (confirm("Êtes-vous sûr de vouloir supprimer cette pierre ?")) {
+        await this.deleteProduct(productId);
+      }
+    },
+    async deleteProduct(productId) {
+      try {
+        await axios.delete(`http://localhost:3000/products/${productId}`);
+        // Mise à jour de la liste des produits après la suppression
+        await this.getProducts();
+        alert("Pierre supprimée avec succès !");
+      } catch (error) {
+        console.error("Erreur lors de la suppression de la pierre :", error);
+        alert("Erreur lors de la suppression de la pierre. Veuillez réessayer.");
+      }
+    },
   },
 };
 </script>
 
 <style scoped>
+.btnDelete {
+  background-color: #d1001f;
+  color: white;
+  width: 30%; 
+}
 
+.btnDelete i {
+margin: 0 auto;
+}
 </style>
+

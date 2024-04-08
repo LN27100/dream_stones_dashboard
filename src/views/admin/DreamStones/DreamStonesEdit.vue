@@ -4,16 +4,16 @@
     <select
       id="selectedProductId"
       name="selectedProductId"
-      v-model="selectedProductId"
+      v-model="selectedProduct"
       @change="fetchProductDetails"
     >
-      <option selected value="">Choisissez un ID</option>
+      <option disabled value="">Sélectionner une pierre</option>
       <option
-        v-for="productId in productIds"
-        :key="productId"
-        :value="productId"
+        v-for="product in products"
+        :key="product.PRODUCT_ID"
+        :value="product"
       >
-        {{ productId }}
+        {{ product.PRODUCT_NAME }}
       </option>
     </select>
 
@@ -45,7 +45,6 @@
 
       <div class="spaceBtn">
         <button class="btn2" @click="showEditForm">Modifier</button>
-        <button class="btn2" @click="confirmDelete">Supprimer</button>
       </div>
 
       <!-- Formulaire de modification -->
@@ -131,8 +130,7 @@ export default {
   emits: ['vnode-unmounted'], // Déclaration des événements émis
   data() {
     return {
-      productIds: [],
-      selectedProductId: null,
+      products: [],
       selectedProduct: null,
       showEditFormFlag: false,
       updatedProduct: {
@@ -147,18 +145,16 @@ export default {
     };
   },
   mounted() {
-    this.fetchProductIds();
+    this.fetchProducts();
   },
   methods: {
-    async fetchProductIds() {
+    async fetchProducts() {
       try {
         const response = await axios.get("http://localhost:3000/products");
-        this.productIds = response.data.products.map(
-          (product) => product.PRODUCT_ID
-        );
+        this.products = response.data.products;
       } catch (error) {
         console.error(
-          "Erreur lors de la récupération des IDs des produits :",
+          "Erreur lors de la récupération des produits :",
           error
         );
       }
@@ -198,20 +194,6 @@ export default {
         this.deleteProduct();
       }
     },
-    async deleteProduct() {
-      try {
-        await axios.delete(
-          `http://localhost:3000/products/${this.selectedProductId}`
-        );
-        alert("Produit supprimé avec succès !");
-        // Redirection vers le dashboard après la suppression
-        this.$router.push("/admin/dashboard");
-      } catch (error) {
-        console.error("Erreur lors de la suppression du produit :", error);
-        alert("Erreur lors de la suppression du produit. Veuillez réessayer.");
-      }
-    },
-
     cancelEdit() {
       // Retourner formulaire aux détails actuels du produit
       this.updatedProduct = { ...this.selectedProduct };
