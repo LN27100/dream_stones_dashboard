@@ -47,7 +47,9 @@
           v-model="productData.PRODUCT_UNIT_PRICE"
           required
         />
-        <span v-if="!productData.PRODUCT_UNIT_PRICE" class="required-label">*</span>
+        <span v-if="!productData.PRODUCT_UNIT_PRICE" class="required-label"
+          >*</span
+        >
       </div>
 
       <div class="input-container">
@@ -58,7 +60,9 @@
           v-model="productData.PRODUCT_ORIGIN_COUNTRY"
           required
         />
-        <span v-if="!productData.PRODUCT_ORIGIN_COUNTRY" class="required-label">*</span>
+        <span v-if="!productData.PRODUCT_ORIGIN_COUNTRY" class="required-label"
+          >*</span
+        >
       </div>
 
       <div class="input-container">
@@ -69,17 +73,14 @@
           v-model="productData.PRODUCT_PICTURE"
           required
         />
-        <span v-if="!productData.PRODUCT_PICTURE" class="required-label">*</span>
+        <span v-if="!productData.PRODUCT_PICTURE" class="required-label"
+          >*</span
+        >
       </div>
 
       <div class="input-container">
         <label for="splId">Identifiant SPL:</label>
-        <input
-          type="number"
-          id="splId"
-          v-model="productData.SPL_ID"
-          required
-        />
+        <input type="number" id="splId" v-model="productData.SPL_ID" required />
         <span v-if="!productData.SPL_ID" class="required-label">*</span>
       </div>
 
@@ -121,7 +122,7 @@
       </div>
     </form>
 
-    <p class="message" v-if="message">{{ message }}</p>
+    <p :class="messageClass" v-if="message">{{ message }}</p>
   </div>
 </template>
 
@@ -129,7 +130,7 @@
 import axios from "axios";
 
 export default {
-  emits: ['vnode-unmounted'],
+  emits: ["vnode-unmounted"],
   data() {
     return {
       productData: {
@@ -150,49 +151,61 @@ export default {
   methods: {
     async addProduct() {
       try {
-        const response = await axios.post(
-          "http://localhost:3000/products",
-          this.productData
+        // Vérifier si la référence du produit existe déjà
+        const response = await axios.get(
+          `http://localhost:3000/products?PRODUCT_REF=${this.productData.PRODUCT_REF}`
         );
-        this.message = response.data.message;
+
+        if (response.data.products.length > 0) {
+          // Si une produit avec cette référence existe déjà, afficher un message d'erreur
+          this.message = "La référence du produit existe déjà.";
+        } else {
+          // Sinon, ajouter le produit
+          const addResponse = await axios.post(
+            "http://localhost:3000/products",
+            this.productData
+          );
+          this.message = addResponse.data.message;
+        }
+
         // Afficher le message pendant 3 secondes puis le supprimer
         setTimeout(() => {
           this.message = "";
         }, 3000);
       } catch (error) {
-        this.message =
-          "Une erreur s'est produite lors de l'ajout du produit.";
+        this.message = "Une erreur s'est produite lors de l'ajout du produit.";
         console.error(error);
       }
     },
   },
+  computed: {
+    // Calcul de la classe conditionnelle en fonction du type de message
+    messageClass() {
+      return this.message === "La référence du produit existe déjà." ? "error-message" : "success-message";
+    }
+  }
 };
 </script>
 
-<style>
-
-
-.input-container {
-  position: relative;
-}
-
-/* champs obligatoires */
-.required-label {
-  position: absolute;
-  top: 5px;
-  right: -15px;
-  color: red;
-  font-size: 1rem;
-}
-
-  /* Pop-up confirmation ajout pierre */
-
-.message {
-  background-color: #4CAF50;
+<style scoped>
+/* Ajout des styles pour les messages d'erreur et de succès */
+.success-message {
+  background-color: #4caf50;
   color: white;
   text-align: center;
   padding: 16px;
   border-radius: 5px;
   margin-top: 10px;
+  text-decoration: none;
+}
+
+.error-message {
+  background-color: red;
+  color: white;
+  text-align: center;
+  padding: 16px;
+  border-radius: 5px;
+  margin-top: 10px;
+  text-decoration: none;
 }
 </style>

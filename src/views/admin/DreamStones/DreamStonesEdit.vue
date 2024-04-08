@@ -189,11 +189,6 @@ export default {
         console.error("Erreur lors de la mise à jour du produit :", error);
       }
     },
-    confirmDelete() {
-      if (confirm("Êtes-vous sûr de vouloir supprimer ce produit ?")) {
-        this.deleteProduct();
-      }
-    },
     cancelEdit() {
       // Retourner formulaire aux détails actuels du produit
       this.updatedProduct = { ...this.selectedProduct };
