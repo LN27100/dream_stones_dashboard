@@ -18,6 +18,7 @@
     </select>
 
     <div v-if="selectedProduct">
+      <!-- Détails de la pierre sélectionnée -->
       <p class="recupText2">
         <span>ID:</span> {{ selectedProduct.PRODUCT_ID }}
       </p>
@@ -162,7 +163,7 @@ export default {
     async fetchProductDetails() {
       try {
         const response = await axios.get(
-          `http://localhost:3000/products/${this.selectedProductId}`
+          `http://localhost:3000/products/${this.selectedProduct.PRODUCT_ID}`
         );
         this.selectedProduct = response.data.product;
       } catch (error) {
@@ -180,7 +181,7 @@ export default {
     async updateProduct() {
       try {
         await axios.put(
-          `http://localhost:3000/products/${this.selectedProductId}`,
+          `http://localhost:3000/products/${this.selectedProduct.PRODUCT_ID}`,
           this.updatedProduct
         );
         await this.fetchProductDetails(); // Actualiser les détails de la pierre après la mise à jour
