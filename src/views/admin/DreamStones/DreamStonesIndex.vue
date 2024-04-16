@@ -1,6 +1,10 @@
 <template>
   <div class="table-container">
     <h1>Liste des pierres et minéraux</h1>
+    <div class="button-container">
+      <button class="btn2" @click="sortByAlphabeticalOrder">Trier par nom</button>
+      <button class="btn2" @click="sortByColor">Trier par couleur</button>
+    </div>
     <table>
       <thead>
         <tr>
@@ -71,11 +75,25 @@ export default {
         alert("Erreur lors de la suppression de la pierre. Veuillez réessayer.");
       }
     },
+   sortByAlphabeticalOrder() {
+      this.products.sort((a, b) => {
+        return a.PRODUCT_NAME.localeCompare(b.PRODUCT_NAME);
+      });
+    },
+    sortByColor() {
+      this.products.sort((a, b) => {
+        return a.PRODUCT_COLOR.localeCompare(b.PRODUCT_COLOR);
+      });
+    },
   },
 };
 </script>
 
 <style scoped>
+.button-container button {
+  margin-right: 10px;
+}
+
 .btnDelete {
   background-color: #d1001f;
   color: white;

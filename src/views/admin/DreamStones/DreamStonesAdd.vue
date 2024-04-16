@@ -11,8 +11,6 @@
           v-model="productData.PRODUCT_REF"
           required
         />
-
-        <!-- contrôle de champs obligatoires affiché uniquement si le champs n'est pas rempli-->
         <span v-if="!productData.PRODUCT_REF" class="required-label">*</span>
       </div>
 
@@ -28,7 +26,6 @@
 
       <div class="input-container">
         <label for="productStock">Stock:</label>
-        <!-- v-model : Lorsque la valeur du champ de saisie est modifiée, la propriété de l'objet est mise à jour automatiquement. -->
         <input
           type="number"
           id="productStock"
@@ -79,7 +76,7 @@
       </div>
 
       <div class="input-container">
-        <label for="splId">Identifiant SPL:</label>
+        <label for="splId">Identifiant fournisseur:</label>
         <input type="number" id="splId" v-model="productData.SPL_ID" required />
         <span v-if="!productData.SPL_ID" class="required-label">*</span>
       </div>
@@ -151,22 +148,11 @@ export default {
   methods: {
     async addProduct() {
       try {
-        // Vérifier si la référence du produit existe déjà
-        const response = await axios.get(
-          `http://localhost:3000/products?PRODUCT_REF=${this.productData.PRODUCT_REF}`
+        const addResponse = await axios.post(
+          "http://localhost:3000/products",
+          this.productData
         );
-
-        if (response.data.products.length > 0) {
-          // Si une produit avec cette référence existe déjà, afficher un message d'erreur
-          this.message = "La référence du produit existe déjà.";
-        } else {
-          // Sinon, ajouter le produit
-          const addResponse = await axios.post(
-            "http://localhost:3000/products",
-            this.productData
-          );
-          this.message = addResponse.data.message;
-        }
+        this.message = addResponse.data.message;
 
         // Afficher le message pendant 3 secondes puis le supprimer
         setTimeout(() => {
@@ -181,9 +167,11 @@ export default {
   computed: {
     // Calcul de la classe conditionnelle en fonction du type de message
     messageClass() {
-      return this.message === "La référence du produit existe déjà." ? "error-message" : "success-message";
-    }
-  }
+      return this.message === "La référence du produit existe déjà."
+        ? "error-message"
+        : "success-message";
+    },
+  },
 };
 </script>
 
