@@ -9,7 +9,7 @@
     >
       <option disabled value="">Sélectionner une pierre</option>
       <option
-        v-for="product in products"
+        v-for="product in sortedProducts"
         :key="product.PRODUCT_ID"
         :value="product"
       >
@@ -116,7 +116,9 @@
           </div>
           <div class="spaceBtn">
             <button class="btn2" type="submit">Enregistrer</button>
-            <button type="button" class="btn2" @click="cancelEdit">Annuler</button>
+            <button type="button" class="btn2" @click="cancelEdit">
+              Annuler
+            </button>
           </div>
         </form>
       </div>
@@ -128,7 +130,7 @@
 import axios from "axios";
 
 export default {
-  emits: ['vnode-unmounted'], // Déclaration des événements émis
+  emits: ["vnode-unmounted"], // Déclaration des événements émis
   data() {
     return {
       products: [],
@@ -154,10 +156,7 @@ export default {
         const response = await axios.get("http://localhost:3000/products");
         this.products = response.data.products;
       } catch (error) {
-        console.error(
-          "Erreur lors de la récupération des produits :",
-          error
-        );
+        console.error("Erreur lors de la récupération des produits :", error);
       }
     },
     async fetchProductDetails() {
@@ -197,6 +196,13 @@ export default {
       this.showEditFormFlag = false;
     },
   },
+  computed: {
+  sortedProducts() {
+    return this.products.slice().sort((a, b) => {
+      return a.PRODUCT_NAME.localeCompare(b.PRODUCT_NAME);
+    });
+  }
+}
 };
 </script>
 
