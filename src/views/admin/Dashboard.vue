@@ -217,15 +217,17 @@ export default {
           plugins: {
             legend: {
               position: "bottom",
-              labels: {
+              align: "start",
+        labels: {
                 font: {
                   family: '"Varela Round", sans-serif',
                   size: 12,
                   style: "normal",
                 },
                 color: "#0B533D",
-                padding: 10,
+                padding: 6,
               },
+              columns: 3,
             },
           },
         },
@@ -369,4 +371,5 @@ h6 {
   font-size: 3rem;
   text-align: center;
 }
+
 </style>
