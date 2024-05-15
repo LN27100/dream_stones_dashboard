@@ -4,8 +4,7 @@
         <!-- Liens de navigation vers les différentes pages -->
     <router-link to="/">Accueil</router-link>
     <span class="divider">|</span>
-    <router-link to="/admin/dashboard">Admin</router-link>
-    <span class="divider">|</span>
+    <!-- <router-link to="/admin/dashboard">Admin</router-link> -->
     <router-link to="/login">Connexion</router-link>
   </nav>
 </template>
